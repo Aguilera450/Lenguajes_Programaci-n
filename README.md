@@ -1,8 +1,9 @@
-# Lenguajes_Programación
+# Lenguajes Programación
 En este repositorio se subiran todas las actualizaciones de tareas y prácticas realizadas en el curso de Lenguajes y Programación con grupo 7079 y a cargo de la [Dra. Karla Ramírez Pulido](https://sites.google.com/ciencias.unam.mx/karlaramirezpulido/home) que se imparte en la Facultad de Ciencias de la UNAM.
 
 ## Integrantes:
 - Adrian Aguilera Moreno. - @Aguiler450
+- Marco Antonio Rivera Silva - @DONMARCORS
 
 ## Masters:
 - Karla Ramírez Pulido          - karla@ciencias.unam.mx
