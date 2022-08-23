@@ -4,6 +4,7 @@ En este repositorio se subiran todas las actualizaciones de tareas y prácticas 
 ## Integrantes:
 - Adrian Aguilera Moreno. - @Aguiler450
 - Marco Antonio Rivera Silva - @DONMARCORS
+- Kevin Jair Torres Valencia - @KevinTorres74
 
 ## Masters:
 - Karla Ramírez Pulido          - karla@ciencias.unam.mx
