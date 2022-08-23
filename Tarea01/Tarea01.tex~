@@ -1,0 +1,221 @@
+\documentclass{article}
+
+%################################# Preliminar
+% Symbols
+\usepackage[T1]{fontenc}
+\usepackage{upgreek}
+\usepackage{physics}
+\usepackage{cancel}
+\usepackage{amsfonts, amsthm}
+\usepackage{amssymb, latexsym, amsmath}
+
+% Proof
+\renewcommand*{\proofname}{\textbf{Soluci\'on:}}
+
+% Theorem
+\newtheorem*{theorem}{Teorema}
+
+%Algorithms
+\usepackage[ruled,lined,linesnumbered,commentsnumbered]{algorithm2e}
+
+%% Identación
+\setlength{\parindent}{0cm}
+
+% Código
+\newcommand{\code}[1]{\textcolor{white!25!black}{\texttt{#1}}}
+\usepackage{listings}
+
+%AMS
+\usepackage{amsthm}
+\newtheorem{algo-thm}{Algoritmo}
+
+% Graphics
+\usepackage{graphicx}
+\usepackage{pgf}
+
+% Margins
+\addtolength{\voffset}{-1.5cm}
+\addtolength{\hoffset}{-1.5cm}
+\addtolength{\textwidth}{3cm}
+\addtolength{\textheight}{3cm}
+
+% Color a letras.
+%\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+
+% Tikz
+\usepackage{tkz-graph}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+%\usetikzlibrary[topaths]
+
+% Def. Dr. César.
+\usetikzlibrary{shapes,calc}
+\tikzstyle{edge}=[shorten <=2pt, shorten >=2pt, >=stealth, line width=1.1pt]
+\tikzstyle{blueE}=[shorten <=2pt, shorten >=2pt, >=stealth, line width=1.5pt, blue]
+\tikzstyle{blackV}=[circle, fill=black, minimum size=6pt, inner sep=0pt, outer sep=0pt]
+\tikzstyle{blueV}=[circle, fill=blue, draw, minimum size=6pt, line width=0.75pt, inner sep=0pt, outer sep=0pt]
+\tikzstyle{redV}=[circle, fill=red, draw, minimum size=6pt, line width=0.75pt, inner sep=0pt, outer sep=0pt]
+\tikzstyle{redSV}=[semicircle, fill=red, minimum size=3pt, inner sep=0pt, outer sep=0pt, rotate=225]
+\tikzstyle{blueSV}=[semicircle, fill=blue, minimum size=3pt, inner sep=0pt, outer sep=0pt, rotate=225]
+\tikzstyle{blackSV}=[semicircle, fill=black, minimum size=3pt, inner sep=0pt, outer sep=0pt, rotate=225]
+\tikzstyle{vertex}=[circle, draw, minimum size=6pt, line width=0.75pt, inner sep=0pt, outer sep=0pt]
+
+%\pagenumbering{gobble} -- Este comando
+%                       -- quita el número de página.
+
+%Header-Footer
+\usepackage{fancyhdr}
+\renewcommand{\headrulewidth}{1pt}
+
+\newcommand{\set}[1]{
+  \left\{ #1 \right\}
+}
+
+\footskip = 50pt
+\renewcommand{\headrulewidth}{1pt}
+
+\pagestyle{fancyplain}
+
+%################################# Inicio de documento
+\begin{document}
+	\input{../Portada/Portada}
+	\section*{\LARGE{Tarea 01}}
+
+\begin{enumerate}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%% Problema 01
+\item ¿Cuántas comparaciones son necesarias
+  y suficientes para ordenar cualquier lista
+  de cinco elementos? Justifique su respuesta.
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%% Problema 02
+\item Diseña un algoritmo que encuentre el
+  segundo elemento más pequeño y el segundo
+  más grande entre un conjunto de $n$ elementos
+  usando a lo más $\frac{3n}{2} + \mathcal{O}(n)$ comparaciones.
+
+  \begin{proof}
+    Sabemos por el teorema visto en clase que,
+    \begin{center}
+      \fbox{
+        \begin{minipage}[b][1\height]%
+          [t]{0.867\textwidth}
+          \begin{theorem}
+            Cualquier algoritmo para ordenar ``$n$'' números,
+            basado en comparaciones, en el peor de los casos
+            tiene que hacer ``$n \log(n)$'' comparaciones.
+          \end{theorem}
+          \textbf{Dem.} Realizada en clase.
+      \end{minipage}}
+    \end{center}
+    un algoritmo de ordenamiento como \textit{merge sort} tiene complejidad en
+    $\mathcal{O}(n\; \log n)$\footnote{Ejemplo visto en clase.}.
+
+    Supongamos que el conjunto de números mencionados están contenidos en un
+    arreglo, luego ordenar este arreglo por \textit{merge sort} nos toma tiempo
+    contenido en $\mathcal{O}(n\; \log n)$, acceder a la posición $1$ y $n - 2$
+    nos toma tiempo constante.
+    \begin{center}
+      \fbox{
+        \begin{minipage}[b][1\height]%
+          [t]{0.867\textwidth}
+          \textbf{Obs.} En un arreglo de tamaño $n$, ordenado en cualquier orden,
+          las posiciones $1$ y $n -2$ corresponden al $2^{\text{do}}$
+          elemento más grande y el $2^{\text{do}}$ más chico del arreglo.
+          \newline
+          
+          \textbf{Dem.} Esto es fácil de ver, pues como el arreglo esta ordenado en algún
+          orden, el primer elemento del arreglo es el más grande o el más
+          pequeño, entonces el segundo es justamente el segundo más grande
+          o segundo más pequeño, caso análogo con el elemento ubicado en la
+          posición $n -2$.
+      \end{minipage}}
+    \end{center}
+    Obviando el algoritmo \textit{merge sort}, a continuación se exhibe un algoritmo
+    que cumple con los requerimientos de este problema
+    
+    \begin{algorithm}[H]
+      \SetAlgorithmName{}{}%Orden Topol\'ogico}{}
+      \DontPrintSemicolon
+      \SetKwData{False}{false}\SetKwData{True}{true}
+      \SetKwFunction{New}{new}\SetKwFunction{End}{end}\SetKwFunction{Used}{used}
+      \SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+
+      \KwIn{Un arreglo de números $A$.}
+      \KwOut{Una dupla de números $(a, b)$ tal que sean los $2^{\text{dos}}$ más grandes y pequeños.}
+      \BlankLine {
+        \uIf{$|A| = 1$}{
+          \Return $(A[0], A[0])$\;
+        }\ElseIf{$|A| = 0$}{
+          \Return\;
+        }
+        \code{MergeSort}(A)\;
+      } {\Return $(A[1], A[n - 2])$\;}
+      \caption{\textnormal{SecondOrder}} \label{SecondOrder}%\textnormal{new}
+      \DecMargin{1em}
+    \end{algorithm}
+    Como ya se venía anticipando, este algoritmo [al que le llamo SecondOrder] tiene
+    complejidad contenida en $\mathcal{O}(2 + n\; \log n)$, ahora mostremos que
+    \[
+    \frac{3n}{2} + \mathcal{O}(n) \geq \mathcal{O}(2 + n\; \log n)
+    \]
+  \end{proof}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%% Problema 03
+\item Dado un arreglo $A$ de $n$ números, queremos
+  contestar la pregunta ¿Hay algún elemento de $A$
+  que aparezca al menos $\frac{n}{3}$ veces? Encuentre
+  un algoritmo lineal para resolver este problema.
+  %%%%%%%%%%%%%%%%%%%%%%%%%%% Problema 04
+\item Dada una lista de n enteros $\{x_1, x_2, . . . , x_n\}$
+  y un número $y$, encuentre un algoritmo que en $O(n \cdot \log n)$
+  encuentre la pareja $(i, j)$ tal que $xi + xj \leq y$ tal que
+  maximice $xi + xj$.
+  %%%%%%%%%%%%%%%%%%%%%%%%%%% Problema 05
+\item Considere el siguiente algoritmo de ordenamiento:
+  \begin{center}
+    \includegraphics[scale=0.4]{./StupidSort.png}
+  \end{center}
+  \begin{itemize}
+  \item[$a$)] Demuestra que STUPIDSORT realmente ordena los valores de entrada.
+  \item[$b$)] ¿El algoritmo aún ordenaría correctamenta la entrada si remplazamos
+    $m = \lceil \frac{2n}{3} \rceil$ por $m = \lfloor \frac{2n}{3} \rfloor$?
+    Justifica tu respuesta. %\displaystyle
+  \item[$c$)] Muestra que el número de intercambios ejecutados por STUPIDSORT es
+    a lo más ${n \choose 2}$.
+  \end{itemize}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%% Problema 06
+\item Un arreglo abs-sorted es un arreglo
+  de números en los que se cumple $|A[i]| \leq |A[j]|$
+  siempre que $i < j$. Por ejemplo, el arreglo
+  $A = [-49, 75, 103, -147, 164, -197, -238, 314, 348, -422]$,
+  aunque no están ordenados en el sentido usual, es
+  un abs-sorted. Diseñe un algoritmo que reciba un
+  arreglo abs-sorted $A$ y un número $k$, y devuelva
+  un par de índices de elementos en $A$ que sumen $k$.
+  Por ejemplo, si $k = 167$, su algoritmo debería generar
+  $(3, 7)$. En caso de no existir tal pareja se devuelve
+  $(-1, -1)$.
+  %%%%%%%%%%%%%%%%%%%%%%%%%%% Problema 07
+\item Se da una secuencia de n elementos para ordenar. La
+  secuencia de entrada consta de $\frac{n}{k}$ subsecuencias,
+  cada una de las cuales contiene $k$ elementos. Los elementos
+  en una subsecuencia dada son todos más pequeños que la
+  subsecuencia siguiente y más grandes que la subsecuencia
+  anterior. Por lo tanto, todo lo que se necesita para ordenar
+  el conjunto secuencia de longitud $n$ es ordenar los $k$
+  elementos en cada uno de las $\frac{n}{k}$ subsecuencias.
+  Mostrar un $\Omega(n\; \log k)$ límite inferior del número
+  de comparaciones necesarias para resolver esta variante del
+  problema de clasificación.
+  %%%%%%%%%%%%%%%%%%%%%%%%%%% Problema 08
+\item Supongamos que tenemos que ordenar una lista $L$ de $n$
+  enteros cuyos valores están entre $1$ y $m$. Pruebe que si
+  $m$ es $O(n)$ entonces los elementos de $L$ pueden ser ordenados
+  en tiempo lineal. ¿Qué pasa si $m$ es de $O(n^2)$? ¿Se puede
+  realizar en tiempo lineal? ¿Por qué? 
+\end{enumerate}
+
+\end{document}
+
+
