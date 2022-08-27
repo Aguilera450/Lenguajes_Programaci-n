@@ -1,88 +1,108 @@
 \documentclass{article}
-
-%################################# Preliminar
-% Symbols
-\usepackage[T1]{fontenc}
-\usepackage{upgreek}
-\usepackage{physics}
-\usepackage{cancel}
-\usepackage{amsfonts, amsthm}
-\usepackage{amssymb, latexsym, amsmath}
-
-% Proof
-\renewcommand*{\proofname}{\textbf{Soluci\'on:}}
-
-% Theorem
-\newtheorem*{theorem}{Teorema}
-
-%Algorithms
-\usepackage[ruled,lined,linesnumbered,commentsnumbered]{algorithm2e}
-
-%% Identación
-\setlength{\parindent}{0cm}
-
-% Código
-\newcommand{\code}[1]{\textcolor{white!25!black}{\texttt{#1}}}
-\usepackage{listings}
-
-%AMS
-\usepackage{amsthm}
-\newtheorem{algo-thm}{Algoritmo}
-
-% Graphics
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,mexico]{babel}
+\usepackage[margin=2.3cm]{geometry}
 \usepackage{graphicx}
-\usepackage{pgf}
-
-% Margins
-\addtolength{\voffset}{-1.5cm}
-\addtolength{\hoffset}{-1.5cm}
-\addtolength{\textwidth}{3cm}
-\addtolength{\textheight}{3cm}
-
-% Color a letras.
-%\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
-
-% Tikz
-\usepackage{tkz-graph}
-\usepackage{tikz}
-\usetikzlibrary{arrows,automata}
-\usepackage{tikz}
-\usetikzlibrary{arrows,automata}
-%\usetikzlibrary[topaths]
-
-% Def. Dr. César.
-\usetikzlibrary{shapes,calc}
-\tikzstyle{edge}=[shorten <=2pt, shorten >=2pt, >=stealth, line width=1.1pt]
-\tikzstyle{blueE}=[shorten <=2pt, shorten >=2pt, >=stealth, line width=1.5pt, blue]
-\tikzstyle{blackV}=[circle, fill=black, minimum size=6pt, inner sep=0pt, outer sep=0pt]
-\tikzstyle{blueV}=[circle, fill=blue, draw, minimum size=6pt, line width=0.75pt, inner sep=0pt, outer sep=0pt]
-\tikzstyle{redV}=[circle, fill=red, draw, minimum size=6pt, line width=0.75pt, inner sep=0pt, outer sep=0pt]
-\tikzstyle{redSV}=[semicircle, fill=red, minimum size=3pt, inner sep=0pt, outer sep=0pt, rotate=225]
-\tikzstyle{blueSV}=[semicircle, fill=blue, minimum size=3pt, inner sep=0pt, outer sep=0pt, rotate=225]
-\tikzstyle{blackSV}=[semicircle, fill=black, minimum size=3pt, inner sep=0pt, outer sep=0pt, rotate=225]
-\tikzstyle{vertex}=[circle, draw, minimum size=6pt, line width=0.75pt, inner sep=0pt, outer sep=0pt]
-
-%\pagenumbering{gobble} -- Este comando
-%                       -- quita el número de página.
-
-%Header-Footer
+\usepackage[export]{adjustbox}
+\usepackage{caption}
+\usepackage{subcaption}
 \usepackage{fancyhdr}
-\renewcommand{\headrulewidth}{1pt}
+\usepackage{lipsum}
 
-\newcommand{\set}[1]{
-  \left\{ #1 \right\}
-}
 
-\footskip = 50pt
-\renewcommand{\headrulewidth}{1pt}
+\usepackage{amsmath}
+%%\usepackage{graphicx}
+%%\usepackage{subcaption}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{url}
 
-\pagestyle{fancyplain}
+%%Tablas con color
+\usepackage{xcolor, colortbl}
+\usepackage{array, multirow, multicol}
+\cellcolor[modelo color]{color}
 
-%################################# Inicio de documento
+\pagestyle{fancy}
+\fancyhf{}
+
+\title{Plantilla Facultad de Ciencias, UNAM}
+\date{\today}
+
 \begin{document}
-	\input{../Portada/Portada}
-	\section*{\LARGE{Tarea 01}}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Aquí va el código de la tarea %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\thispagestyle{empty}
+	
+	\begin{figure}[ht]
+	   \minipage{0.76\textwidth}
+			\includegraphics[width=4cm]{Logo_UNAM.png}
+			\label{EscudoUNAM}
+	   \endminipage
+	   \minipage{0.32\textwidth}
+			\includegraphics[height = 4.9cm ,width=4cm]{Logo_FC.png}
+			\label{EscudoFC}
+		\endminipage
+	\end{figure}
+	
+	\begin{center}
+	\vspace{0.8cm}
+	\LARGE
+	UNIVERSIDAD NACIONAL AUTÓNOMA DE MÉXICO 
+	
+	\vspace{0.7cm}
+	\LARGE
+	FACULTAD DE CIENCIAS
+	
+	\vspace{0.8 cm}	
+	\Large
+	\textbf{Tarea 1}
+
+	\vspace{0.8 cm}
+	\normalsize	
+	INTEGRANTES \\
+	\vspace{.2cm}
+	\large
+	\textbf{Torres Valencia Kevin Jair - \texttt{318331818}}\\
+	\textbf{Aguilera Moreno Adrián - \texttt{421005200}}\\
+	\textbf{Rivera Silva Marco Antonio - \texttt{318183583}}\\
+	%\textbf{Nombre - \texttt{Número de cuenta}}
+	
+	\vspace{1 cm}
+	\normalsize	
+	PROFESORA \\
+	\vspace{.2cm}
+	\large
+	\textbf{Karla Ramírez Pulido}
+	
+	\vspace{1 cm}
+	AYUDANTES \\
+	\vspace{.2cm}
+	\large
+	\textbf{Alan Alexis Martínez López}\\
+	\textbf{Manuel Ignacio Castillo López}\\
+	\textbf{Alejandra Cervera Taboada}
+	\vspace{1.3cm}
+	
+	\normalsize	
+	ASIGNATURA \\
+	\vspace{.2cm}
+	\large
+	\textbf{Lenguajes de Programación}
+	
+	\vspace{1 cm}
+	\today
+	\end{center}
+	
+	\newpage
+	\input{pregunta1}
+	\input{pregunta2}
+    \input{pregunta3}
+	\input{pregunta4}
+	\input{pregunta4b}
+	\input{pregunta4c}
+	\input{pregunta4d}
+	\input{pregunta5}
+	\input{pregunta6}
+	\input{pregunta7}
+	\input{pregunta8}
 \end{document}
-
-
