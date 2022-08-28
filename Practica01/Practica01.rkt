@@ -16,6 +16,20 @@
       #f))
 
 
+;; Punto 9
+;; rota: (listof any) -> (listof (listof any))
+(define (rota lista)
+  (if (empty? lista)
+      empty
+      (rotaAux lista (length lista))))
+
+(define (rotaAux lista longitud)
+  (if (zero? longitud)
+      empty
+      (cons lista (rotaAux (rotaIzq lista) (- longitud 1)))))
+
+(define (rotaIzq lista)
+  (append (rest lista) (list (first lista))))
 ;; Pruebas Unitarias ==========================================================
 ;; Punto 1
 (define (prueba-filtra-lista)
@@ -28,4 +42,11 @@
 (define (prueba2-palindromo?)
   (test (palindromo? "girafarig") #t))
 
-(prueba1-palindromo?)
+;; Punto 9
+(define (prueba1-rota)
+  (test (rota (list 1 2 3)) (list (list 1 2 3) (list 2 3 1) (list 3 1 2))))
+
+(define (prueba2-rota)
+  (test (rota (list "hola" #f 5)) (list (list "hola" #f 5) (list #f 5 "hola") (list 5 "hola" #f))))
+
+(prueba2-rota)
