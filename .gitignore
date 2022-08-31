@@ -5,3 +5,5 @@
 *.tex~
 *.run.xml
 *.gitignore~
+*.fdb_latexmk
+*.syctex.gz
