@@ -67,8 +67,27 @@
 
 
 ;; Punto 8
-;; prom-mod-med: (listof number) -> number (listof number) number
+;; prom-mod-med: (listof number) → number (listof number) number
+(define (prom-mod-med lista)
+  (if (empty? lista)
+      (values "Sin datos" (list "Sin datos") "Sin datos")
+      (values (pro lista) (med lista))))
 
+(define (pro lista)
+  (/ (apply + lista) (length lista)))
+
+(define (med lista)
+  (if(= (modulo (length lista) 2) 0)
+     (med1centro lista)
+     (med2centro lista)))
+
+(define (med1centro lista)
+  (let ([lista-ord (sort lista <)])
+    (/(+ (list-ref lista-ord (- (/ (length lista-ord) 2) 1)) (list-ref lista-ord (/ (length lista-ord) 2))) 2)))
+
+(define (med2centro lista)
+  (let ([lista-ord (sort lista <)])
+    (list-ref lista-ord (floor(/ (length lista-ord) 2)))))
 
 ;; Punto 9
 ;; rota: (listof any) -> (listof (listof any))
@@ -86,7 +105,41 @@
   (append (rest lista) (list (first lista))))
 
 ;; Punto 10
+(define (extender-suc-geom lista)
+  (let* ([n (length lista)]
+         [i 1]
+         [a1 (car lista)]
+         [r (/ (list-ref lista (- (length lista) 1)) (list-ref lista (- (length lista) 2)))]
+         [lista2 (aux-regresa-lista n r a1 i)])
+    (if (and (aux-compara lista lista2) #t)
+        (aux-geom n i a1 r)
+        '())))
 
+;; Funcion auxiliar que hace que se imprima como en los ejemplos
+(define (aux-geom n i a1 r)
+  (define (formato n i al r)
+    (string-append (number->string a1) "*" (number->string r) "^(" (number->string i) "-1)"))
+  (if(= i n)
+     (cons (formato n i a1 r) '())
+     (cons (formato n i a1 r) (aux-geom n (+ 1 i) a1 r))))
+
+;; Funcion auxiliar para calcular a1 * r^(i - 1)
+(define (auxCalcular r a1 i)
+  (* a1 (expt r (sub1 i))))
+
+;; Funcion auxiliar para regresar la lista con los elementos
+(define (aux-regresa-lista n r a1 i)
+  (if (= n i)
+      (cons (auxCalcular r a1 i) '())
+      (cons (auxCalcular r a1 i) (aux-regresa-lista n r a1 (+ 1 i)))))
+
+;; Funcion auxiliar para extender-suc-geom que compara 2 listas
+(define (aux-compara lista1 lista2)
+  (if (empty? lista1)
+      #t
+      (if (= (first lista1) (first lista2))
+          (and #t (aux-compara (rest lista1) (rest lista2)))
+          (and #f))))
 ;; Punto 11 Pruebas Unitarias ==========================================================
 ;; Punto 1
 (define (prueba1-filtra-lista)
@@ -134,7 +187,6 @@
 
 ;; Punto 8
 
-
 ;; Punto 9
 (define (prueba1-rota)
   (test (rota (list 1 2 3)) (list (list 1 2 3) (list 2 3 1) (list 3 1 2))))
@@ -143,4 +195,10 @@
   (test (rota (list "hola" #f 5)) (list (list "hola" #f 5) (list #f 5 "hola") (list 5 "hola" #f))))
 
 ;; punto 10
+(define (prueba1-extender-suc-geom)
+  (test (extender-suc-geom (list 1 2 4 8 16 32))
+        (list "1*2^(1-1)" "1*2^(2-1)" "1*2^(3-1)" "1*2^(4-1)" "1*2^(5-1)" "1*2^(6-1)")))
 
+(define (prueba2-extender-suc-geom)
+  (test (extender-suc-geom (list 5 10 20 40 80))
+        (list "5*2^(1-1)" "5*2^(2-1)" "5*2^(3-1)" "5*2^(4-1)" "5*2^(5-1)")))
