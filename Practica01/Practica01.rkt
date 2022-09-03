@@ -200,7 +200,10 @@ r = (a_n)/(a_n−1) y que a_1 es el primer elemento en la lista dada.|#
       (if (= (first lista1) (first lista2))
           (and #t (aux-compara (rest lista1) (rest lista2)))
           (and #f))))
-#| Ejercicio 11 |#
+#| Ejercicio 11
+Defina funciones que realicen una prueba unitaria de cada uno de los ejercicios
+en la práctica; es decir para obtener el punto extra deberá definir 10 funciones
+de prueba. Utilice la función incluida en el lenguaje plai test para realizarlo.|#
 
 ;; =====================================  Pruebas Unitarias  ======================================
 
