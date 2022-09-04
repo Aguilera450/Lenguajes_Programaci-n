@@ -116,25 +116,10 @@ la lista.|#
 (define (prom-mod-med lista)
   (if (empty? lista)
       (values "Sin datos" (list "Sin datos") "Sin datos")
-      (values (pro lista) (mode lista) (med lista))))
+      (values (pro lista) (med lista))))
 
 (define (pro lista)
   (/ (apply + lista) (length lista)))
-
-(define (mode lista)
-  (let bucle ((hash (make-immutable-hash)) (lista lista) (n-freq 0) (n-cur #f))
-    (if (null? lista)
-        n-cur
-        (let* ((element (car lista)) (freq (add1 (hash-ref hash element 0))))
-          (if (> freq n-freq)
-              (bucle (hash-set hash element freq)
-                    (cdr lista)
-                    freq
-                    element)
-              (bucle (hash-set hash element freq)
-                    (cdr lista)
-                    n-freq
-                    n-cur))))))
 
 (define (med lista)
   (if(= (modulo (length lista) 2) 0)
