@@ -97,6 +97,17 @@ combinaciones ($1, $2, $1) y ($2, $1, $1); pero en ambos casos tenemos una
 moneda de $2 y dos de $1; por lo que solo están cambiando de lugar y las
 consideraremos repetidas.|#
 ;; num-comb-monedas: number → number
+(define (num-comb-monedas cantidad)
+  (let*-values(
+              [(cuantos10 falta) (quotient/remainder cantidad 10)]
+              [(casos10) (* cuantos10 10)])
+              (cond
+                [(= falta 0) casos10]
+                [(= falta 1) (+ casos10 1)]
+                [(= falta 2) (+ casos10 2)]
+                [(= falta 3) (+ casos10 2)]
+                [(= falta 4) (+ casos10 3)]
+                [else (- cantidad 1)])))
 
 
 #| Ejercicio 8
@@ -118,33 +129,26 @@ la lista.|#
       (values "Sin datos" (list "Sin datos") "Sin datos")
       (values (pro lista) (mode lista) (med lista))))
 
+;; Funcion Auxiliar que obtiene el promedio
 (define (pro lista)
   (/ (apply + lista) (length lista)))
 
+;; Funcion Auxiliar que obtiene la moda
 (define (mode lista)
-  (let bucle ((hash (make-immutable-hash)) (lista lista) (n-freq 0) (n-cur #f))
-    (if (null? lista)
-        n-cur
-        (let* ((element (car lista)) (freq (add1 (hash-ref hash element 0))))
-          (if (> freq n-freq)
-              (bucle (hash-set hash element freq)
-                    (cdr lista)
-                    freq
-                    element)
-              (bucle (hash-set hash element freq)
-                    (cdr lista)
-                    n-freq
-                    n-cur))))))
+  '("Hola"))
 
+;; Funcion Auxiliar que obtiene la mediana
 (define (med lista)
   (if(= (modulo (length lista) 2) 0)
      (med1centro lista)
      (med2centro lista)))
 
+;; Funcion Auxiliar que obtiene la mediana cuando el numero de elementos es par
 (define (med1centro lista)
   (let ([lista-ord (sort lista <)])
     (/(+ (list-ref lista-ord (- (/ (length lista-ord) 2) 1)) (list-ref lista-ord (/ (length lista-ord) 2))) 2)))
 
+;; Funcion Auxiliar que obtiene la mediana cuando el numero de elementos es impar
 (define (med2centro lista)
   (let ([lista-ord (sort lista <)])
     (list-ref lista-ord (floor(/ (length lista-ord) 2)))))
@@ -159,11 +163,13 @@ elementos de una lista dada.|#
       empty
       (rotaAux lista (length lista))))
 
+;; Fiuncion que rota la lista una cantidad de veces igual a la longitud de la lista
 (define (rotaAux lista longitud)
   (if (zero? longitud)
       empty
       (cons lista (rotaAux (rotaIzq lista) (- longitud 1)))))
 
+;; Funcion auxiliar que rota la lista a la izquierda
 (define (rotaIzq lista)
   (append (rest lista) (list (first lista))))
 
@@ -265,8 +271,26 @@ de prueba. Utilice la función incluida en el lenguaje plai test para realizarlo
   (test (primo? 11) #t))
 
 ;; Ejercicio 7
+(define (prueba1-num-comb-monedas)
+  (test (num-comb-monedas 7) 6))
+
+(define (prueba2-num-comb-monedas)
+  (test (num-comb-monedas 10) 10))
 
 ;; Ejercicio 8
+;; Estas pruebas muestra los resultados uno por uno, porque no pudimos hacer que diera el resultado con los 3 datos a la vez.
+;; Solo hicimos promedio y mediana.
+(define (prueba1-prom-mod-med)
+  (test (pro (list 10 7 4 6 8 10 10 9)) 8))
+
+(define (prueba2-prom-mod-med)
+  (test (med (list 10 7 4 6 9 10 10 9)) 9))
+
+(define (prueba3-prom-mod-med)
+  (test (pro (list 2 8 7 3 5)) 5))
+
+(define (prueba4-prom-mod-med)
+  (test (med (list 2 8 7 3 5)) 5))
 
 ;; Ejercicio 9
 (define (prueba1-rota)
