@@ -1,4 +1,8 @@
 #lang plai
+;;Integrantes del Equipo
+;; Marco Antonio Rivera Silva 318183583
+;; Adrian Aguilera Moreno 421005200
+;; Kevin Jair Torres Valencia 318331818
 
 #| Ejercicio 1
 Defina una función que filtre el contenido de una lista dado un predicado.
@@ -45,6 +49,7 @@ Por ejemplo, el número 153 (que tiene 3 cifras) es raro, pues
       #t
       #f))
 
+;; Funcion Auxiliar del ejercicio 3 que suma todos los digitos elevado a la potencia indicada
 (define (sumaDigitos x long) 
   (if (= x 0)
       0
@@ -79,6 +84,7 @@ exacta).|#
 (define (primo? numero)
   (primoAux numero 2))
 
+;; Funcion auxiliar del ejercicio 6 que checa todos los requisitos para ver si es un numero primo.
 (define (primoAux num div)
   (cond
     [(and (<= num 2) (= num 2)) #t]
@@ -129,26 +135,26 @@ la lista.|#
       (values "Sin datos" (list "Sin datos") "Sin datos")
       (values (pro lista) (mode lista) (med lista))))
 
-;; Funcion Auxiliar que obtiene el promedio
+;; Funcion Auxiliar del ejercicio 8 que obtiene el promedio
 (define (pro lista)
   (/ (apply + lista) (length lista)))
 
-;; Funcion Auxiliar que obtiene la moda
+;; Funcion Auxiliar del ejercicio 8 que obtiene la moda
 (define (mode lista)
   '("Hola"))
 
-;; Funcion Auxiliar que obtiene la mediana
+;; Funcion Auxiliar del ejercicio 8 que obtiene la mediana
 (define (med lista)
   (if(= (modulo (length lista) 2) 0)
      (med1centro lista)
      (med2centro lista)))
 
-;; Funcion Auxiliar que obtiene la mediana cuando el numero de elementos es par
+;; Funcion Auxiliar del ejercicio 8 que obtiene la mediana cuando el numero de elementos es par
 (define (med1centro lista)
   (let ([lista-ord (sort lista <)])
     (/(+ (list-ref lista-ord (- (/ (length lista-ord) 2) 1)) (list-ref lista-ord (/ (length lista-ord) 2))) 2)))
 
-;; Funcion Auxiliar que obtiene la mediana cuando el numero de elementos es impar
+;; Funcion Auxiliar del ejercicio 8 que obtiene la mediana cuando el numero de elementos es impar
 (define (med2centro lista)
   (let ([lista-ord (sort lista <)])
     (list-ref lista-ord (floor(/ (length lista-ord) 2)))))
@@ -163,13 +169,13 @@ elementos de una lista dada.|#
       empty
       (rotaAux lista (length lista))))
 
-;; Fiuncion que rota la lista una cantidad de veces igual a la longitud de la lista
+;; Fiuncion auxiliar del ejercicio 9 que rota la lista una cantidad de veces igual a la longitud de la lista
 (define (rotaAux lista longitud)
   (if (zero? longitud)
       empty
       (cons lista (rotaAux (rotaIzq lista) (- longitud 1)))))
 
-;; Funcion auxiliar que rota la lista a la izquierda
+;; Funcion auxiliar del ejercicio 9 que rota la lista a la izquierda
 (define (rotaIzq lista)
   (append (rest lista) (list (first lista))))
 
@@ -196,7 +202,7 @@ r = (a_n)/(a_n−1) y que a_1 es el primer elemento en la lista dada.|#
         (aux-geom n i a1 r)
         '())))
 
-;; Funcion auxiliar que hace que se imprima como en los ejemplos
+;; Funcion auxiliar del ejercicio 10 que hace que se imprima como en los ejemplos
 (define (aux-geom n i a1 r)
   (define (formato n i al r)
     (string-append (number->string a1) "*" (number->string r) "^(" (number->string i) "-1)"))
@@ -204,17 +210,17 @@ r = (a_n)/(a_n−1) y que a_1 es el primer elemento en la lista dada.|#
      (cons (formato n i a1 r) '())
      (cons (formato n i a1 r) (aux-geom n (+ 1 i) a1 r))))
 
-;; Funcion auxiliar para calcular a1 * r^(i - 1)
+;; Funcion auxiliar del ejercicio 10 para calcular a1 * r^(i - 1)
 (define (auxCalcular r a1 i)
   (* a1 (expt r (sub1 i))))
 
-;; Funcion auxiliar para regresar la lista con los elementos
+;; Funcion auxiliar del ejercicio 10 para regresar la lista con los elementos
 (define (aux-regresa-lista n r a1 i)
   (if (= n i)
       (cons (auxCalcular r a1 i) '())
       (cons (auxCalcular r a1 i) (aux-regresa-lista n r a1 (+ 1 i)))))
 
-;; Funcion auxiliar para extender-suc-geom que compara 2 listas
+;; Funcion auxiliar del ejercicio 10 para extender-suc-geom que compara 2 listas
 (define (aux-compara lista1 lista2)
   (if (empty? lista1)
       #t
