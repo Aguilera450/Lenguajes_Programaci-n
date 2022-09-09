@@ -34,14 +34,12 @@ esto es (se obvia la observación anterior)
 \begin{eqnarray*}
   \code{(subst e)} &=& \code{(subst (with ((id '$y$) (sub (num $30$) (sub (id '$y$) (id '$z$)))))}\\
   & & \code{(sub (num $30$) (add (id '$y$) (id '$z$)))))}\\
-  &=& \code{(with (subst ((id '$y$) (sub (num $30$) (sub (id '$y$) (id '$z$))))))}\\
-  & & \code{(subst (sub (num $30$) (add (id '$y$) (id '$z$)))))}\\
-  &=& \code{(with ((subst (id '$y$)) (subst (sub (num $30$) (sub (id '$y$) (id '$z$))))))}\\
-  & & \code{(sub (subst (num $30$)) (subst (add (id '$y$) (id '$z$)))))}\\
+  &=& \code{(with ((id '$y$) (subst (sub (num $30$) (sub (id '$y$) (id '$z$))))))}\\
+  & & \code{(sub (num $30$) (add (id '$y$) (id '$z$)))))}\\
   &=& \code{(with ((id '$y$) (sub (subst (num $30$)) (subst (sub (id '$y$) (id '$z$))))))}\\
-  & & \code{(sub (num $30$) (add (subst (id '$y$)) (subst (id '$z$))))))}\\
-  &=& \code{(with ((id '$w$) (sub (num $30$) (sub (subst (id '$y$)) (subst (id '$z$))))))}\\
-  & & \code{(sub (num $30$) (add (id '$w$) (id '$z$)))))}\\
-  &=& \code{(with ((id '$w$) (sub (num $30$) (sub (id '$w$) (id '$z$)))))}\\
-  & & \code{(sub (num $30$) (add (id '$w$) (id '$z$)))))}.
+  & & \code{(sub (num $30$) (add (id '$y$) (id '$z$)))))}\\
+  &=& \code{(with ((id '$y$) (sub (num $30$) (sub (subst (id '$y$)) (subst (id '$z$))))))}\\
+  & & \code{(sub (num $30$) (add (id '$y$) (id '$z$)))))}\\
+  &=& \code{(with ((id '$y$) (sub (num $30$) (sub (id '$w$) (id '$z$)))))}\\
+  & & \code{(sub (num $30$) (add (id '$y$) (id '$z$)))))}\\.
 \end{eqnarray*}
