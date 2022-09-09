@@ -1,0 +1,39 @@
+\vspace*{0.3cm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Inciso 2A:
+$a$) $e\: =\: \{+\: a\:\; \{+\: b\:\; \{-\: 32\:\; 57\: \}\: \}\: \}$ \newline
+\hspace*{0.5cm} \code{(subst (parse e) '$a$ (add (num 3) (num 4)))}   \newline
+
+\hspace*{0.3cm} Primero apliquemos la instrucción \code{parse} a la expresión
+\code{e}, esto es
+\begin{eqnarray*}
+  \text{\code{(parse e)}} &=& \code{(add (parse($a$)) (parse($\{+\; b\; \{-\; 35\;\; 57\}\}$)))}\\
+  &=& \code{(add (id '$a$) (add (parse($b$)) (parse($\{-\; 35\;\; 57\}$))))}\\
+  &=& \code{(add (id '$a$) (add (id '$b$) (sub (parse($35$)) (parse($57$)))))}\\
+  &=& \code{(add (id '$a$) (add (id '$b$) (sub (num $35$) (num $57$))))}\\
+  &=& \code{e'}
+\end{eqnarray*}
+ahora, apliquemos la instrucción \code{subst} a \code{e'} y los valores indicados,
+esto es
+
+\begin{center}
+  \fbox{
+    \begin{minipage}[b][1\height]%
+      [t]{0.867\textwidth}
+      \textbf{Obs.} Por simplicidad, asumimos que
+      \begin{center}
+        \code{subst(e') = (subst (e') 'a (add (num 3) (num 4)))}
+      \end{center}
+  \end{minipage}}
+\end{center}
+
+\begin{eqnarray*}
+  \code{subst (e')} &=& \code{(add (subst (id '$a$))
+    (subst ((add (id '$b$) (sub (num $35$) (num $57$))))))}\\
+  &=& \code{(add (add (num 3) (num 4))
+    ((add (subst (id '$b$)) (subst (sub (num $35$) (num $57$))))))}\\
+  &=& \code{(add (add (num 3) (num 4))
+    ((add  (id '$b$)  (sub (subst (num $35$)) (subst (num $57$))))))}\\
+    &=& \code{(add (add (num 3) (num 4))
+    ((add  (id '$b$)  (sub (num $35$) (num $57$)))))}
+\end{eqnarray*}
+
