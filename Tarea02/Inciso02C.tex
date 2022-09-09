@@ -1,5 +1,34 @@
 \vspace*{0.3cm}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% Inciso 2C:
 $c$) $e\: =\: \{\; \code{with} \{y\;\; \{-\; 30\; \{-\; y\;\; z\; \}\; \} $ \newline
-\hspace*{1.5cm} $\{-\; 30\; \{+\; y\;\; z\; \}\; \}$                       \newline
-\hspace*{0.3cm} \code{(subst (parse e) 'z (id 'v))}
+\hspace*{1.5cm} $\{-\; 30\; \{+\; y\;\; z\; \}\; \}$                        \newline
+\hspace*{0.3cm} \code{(subst (parse e) 'z (id 'v))}                         \newline
+
+\hspace*{0.3cm} Observemos que la representación abstracta para este inciso es la
+misma que para el inciso anterior, pues la expresión \code{with}, en principio,
+es la misma. Así, omitimos este paso.
+\newline
+
+Aplicar la instrucción \code{parse} para este inciso nos devuelve lo mismo que en
+el inciso anterior, así omitimos este paso y tomaremos el valor de \code{e'}
+encontrado en el inciso previo.
+\newline
+
+Ahora, apliquemos la instrucción \code{subst} a \code{e'} y los valores indicados,
+esto es (se obvia la observación hecha en este ejercicio)
+
+\begin{eqnarray*}
+  \code{(subst e)} &=& \code{(subst (with ((id '$y$) (sub (num $30$) (sub (id '$y$) (id '$z$)))))}\\
+  & & \code{(sub (num $30$) (add (id '$y$) (id '$z$)))))}\\
+  &=& \code{(with (subst ((id '$y$) (sub (num $30$) (sub (id '$y$) (id '$z$))))))}\\
+  & & \code{(subst (sub (num $30$) (add (id '$y$) (id '$z$)))))}\\
+  &=& \code{(with ((subst (id '$y$)) (subst (sub (num $30$) (sub (id '$y$) (id '$z$))))))}\\
+  & & \code{(sub (subst (num $30$)) (subst (add (id '$y$) (id '$z$)))))}\\
+  &=& \code{(with ((id '$y$) (sub (subst (num $30$)) (subst (sub (id '$y$) (id '$z$))))))}\\
+  & & \code{(sub (num $30$) (add (subst (id '$y$)) (subst (id '$z$))))))}\\
+  &=& \code{(with ((id '$y$) (sub (num $30$) (sub (subst (id '$y$)) (subst (id '$z$))))))}\\
+  & & \code{(sub (num $30$) (add (id '$y$) (id '$v$)))))}\\
+  &=& \code{(with ((id '$y$) (sub (num $30$) (sub (id '$y$) (id '$v$)))))}\\
+  & & \code{(sub (num $30$) (add (id '$y$) (id '$v$)))))}.
+\end{eqnarray*}
+
