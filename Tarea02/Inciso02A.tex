@@ -11,7 +11,7 @@ anterior, esta es
   \end{forest}
 \end{center}
 
-\hspace*{0.3cm} Luego, apliquemos la instrucción \code{parse} a la expresión
+Luego, apliquemos la instrucción \code{parse} a la expresión
 \code{e}, esto es
 \begin{eqnarray*}
   \text{\code{(parse e)}} &=& \code{(add (parse($a$)) (parse($\{+\; b\; \{-\; 35\;\; 57\}\}$)))}\\
@@ -20,7 +20,7 @@ anterior, esta es
   &=& \code{(add (id '$a$) (add (id '$b$) (sub (num $35$) (num $57$))))}\\
   &=& \code{e'}
 \end{eqnarray*}
-ahora, apliquemos la instrucción \code{subst} a \code{e'} y los valores indicados,
+Ahora, apliquemos la instrucción \code{subst} a \code{e'} y los valores indicados,
 esto es
 
 \begin{center}
