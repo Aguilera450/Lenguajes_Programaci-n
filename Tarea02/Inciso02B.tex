@@ -1,4 +1,15 @@
 \vspace*{0.3cm}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% Inciso 2B:
-$b$) $e\: =\: $
+$b$) $e\: =\: \{\; \code{with } \{y\;\; \{-\; 30\; \{-\; y\;\; z\; \}\; \} $ \newline
+\hspace*{1.5cm} $\{-\; 30\; \{+\; y\;\; z\; \}\; \}$                         \newline
+\hspace*{0.3cm} \code{(subst (parse e) 'y (id 'w))}                          \newline
+
+\hspace*{0.3cm} Primero veamos como esta construida la representación abstracta de
+la expresión anterior, esta es
+\begin{center}
+  \begin{forest}
+    [\code{with} [$y$ [$-$ [$30$] [$+$ [$y$] [$z$]]]] [$-$ [$30$] [$+$ [$y$] [$z$]]]]
+  \end{forest}
+\end{center}
+
 
