@@ -1,0 +1,32 @@
+\vspace*{0.5cm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Ejercicio 02:
+\textbf{\textcolor{blue}{3.}} Sea la siguiente expresión del lenguaje \code{WAE}.
+Da la sintaxis abstracta de la misma, muestra el proceso de evaluación mediante
+la función \textbf{interp} y responde las siguientes preguntas.
+\newline
+
+$\{\; \code{with}\; \{\; w\;\; 3\; \} $                        \newline
+\hspace*{0.6cm} $\{\; \code{with} \{\; x\;\; 9\; \}$           \newline
+\hspace*{1.2cm} $\{\; \code{with}\; \{\; y\;\; 4\; \}$         \newline
+\hspace*{1.8cm} $\{\; \code{with}\; \{\; z\;\; 11\; \}$        \newline
+\hspace*{2.4cm} $\{+\; w\; \{+\; x\; \{+\; y\;\; z\; \}\; \}\; \}\; \}\; \}\; \}\; \}$
+\newline
+
+\hspace*{0.3cm} Veamos que la representación de la sintaxis abstracta de la
+expresión anterior es
+\begin{center}
+  \begin{forest}
+    [\code{with} [$w$ [$3$]] [\code{with} [$x$ [$9$]]
+        [\code{with} [$y$ [$4$]] [\code{with} [$z$ [$11$]]
+            [$+$ [$w$] [$+$ [$x$] [$+$ [$y$] [$z$]]]]]]]]
+  \end{forest}
+\end{center}
+
+\begin{itemize}
+\item[$a$)] ¿Cuántas veces se aplica el algoritmo de sustitución para evaluar
+  la expresión?
+\item[$b$)] ¿Qué pasaría si añadimos, $100,000$ sumas con $100, 000$
+  identificadores nuevos a la expresión? ¿Cuántas sustituciones se
+  tendrían que hacer? ¿Qué nos dice esto con respecto al rendimiento
+  de la función \textbf{interp}?
+\end{itemize}
