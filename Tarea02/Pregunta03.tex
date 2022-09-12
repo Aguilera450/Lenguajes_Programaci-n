@@ -22,13 +22,61 @@ expresión anterior es
   \end{forest}
 \end{center}
 Aplicando la función \code{interp} tenemos que
-
+\begin{lstlisting}
+> {with {w 3}
+        {with {x 9}
+            {with {y 4}
+                {with {z 11}
+                    {+ w {+ x {+ y z}}}}}}}
+= {with {x 9}
+        {with {y 4}
+              {with {z 11}
+                    {add (num 3) {+ x {+ y z}}}}}}
+= {with {y 4}
+        {with {z 11}
+              {add (num 3) {add (num 9) {+ y z}}}}}
+= {with {z 11}
+        {add (num 3) {add (num 9) {add (num 4) z}}}}
+= {add (num 3) {add (num 9) {add (num 4) (num 11)}}}
+= {add (num 3) {add (num 9) (num 15)}}
+= {add (num 3) (num 24)}
+= (num 27)
+\end{lstlisting} 
 
 \begin{itemize}
 \item[$a$)] ¿Cuántas veces se aplica el algoritmo de sustitución para evaluar
   la expresión?
+
+  Para el \code{with} con \code{id = w} tenemos que el algoritmo de sustitución
+  se empieza a aplicar desde su cuerpo, después se aplica al valor (\code{val})
+  y cuerpo del \code{with} con \code{id = x} (pues \code{w $\not=$ x}), esto
+  pasa también, para el \code{with} con \code{id = y} e \code{id = z} (hasta
+  aquí hemos aplicado el algoritmo 7 veces, sin aplicarlo al último cuerpo).
+  Eventualmente, llegamos al cuerpo de \code{with} con \code{id = z} donde
+  aplicamos el agoritmo de sustitución 6 veces más.
+
+  A lo anterior le tenemos que sumar las aplicaciones del algoritmo de sustitución
+  si comenzamos desde el \code{with} con \code{id = x}, que son $5$ veces más
+  las $6$ aplicaciones del último cuerpo.
+
+  También sumamos las aplicaciones si iniciamos desde el \code{with} con \code{id = y},
+  que son $3$ más las $6$ del último cuerpo.
+
+  Por último contamos las aplicaciones con el \code{with} de \code{id = z}, estas son
+  $1$ más las $6$ dentro de su cuerpo.
+  
+  Así, tenemos que en total aplicamos $40$ veces el algoritmo de sustitución (esto
+  tomando en cuenta cada llamada recursiva). El algoritmo se aplica para $4$ variables
+  en total (que están en el último cuerpo).
+   
 \item[$b$)] ¿Qué pasaría si añadimos, $100,000$ sumas con $100, 000$
   identificadores nuevos a la expresión? ¿Cuántas sustituciones se
   tendrían que hacer? ¿Qué nos dice esto con respecto al rendimiento
   de la función \textbf{interp}?
+
+  Recordemos que el algoritmo de sustitución es de orden $\mathcal{O}(n^2)$,
+  así la cota será de aproximadamente $(100,004)^2$ aplicaciones en el algoritmo
+  de sustitución.
+
+  La función \code{interp} es ineficiente para cantidades de identificadores grandes.
 \end{itemize}
