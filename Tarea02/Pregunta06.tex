@@ -1,0 +1,85 @@
+{\textcolor{blue}{6.}} Dada la siguiente expresión.
+\begin{lstlisting}
+    {with {w 2}
+        {with {x 3}
+            {with {y {+ w x } }
+                {with { w -2}
+                    {with {x -3 }
+                        {+ y y } } } } } }
+\end{lstlisting}
+\begin{enumerate}
+    \item[a.] Determinar el valor de la expresión. Muestra los pasos que hiciste para hacerlo.
+    El proceso es el siguiente.
+
+    Empezaremos con el primer with, podemos ver que la variable $w$ y se le asignará el valor de 2.
+    \begin{lstlisting}
+        {with {w 2}
+    \end{lstlisting}
+
+    Ahora pasamos al cuerpo del primer with. podemos ver que la variable $x$ todas las veces que salga en el cuerpo de
+    este segundo with será sustituida por el valor de 3.
+
+    \begin{lstlisting}
+        {with {w 2}
+            {with {x 3}
+    \end{lstlisting}
+
+    Ahora pasamos al cuerpo del segundo with (que es otro with). Podemos ver que la variable $y$ va a tener el valor de ${+ w x}$, pero los anteriores
+    with ya nos dieron estos valores, por lo que nuestro valor para y es $\{+ \ 2 \ 3 \}$.
+
+    \begin{lstlisting}
+        {with {w 2}
+            {with {x 3}
+                {with {y {+ w x } }
+    \end{lstlisting}
+
+    Ahora pasamos al cuerpo del tercer with (que es otro with). aquí se nos vuelve a mostrar la variable $w$ sin embargo, todos los with dentro de este with
+    tendrán en valor de la $w$ que se defina en este with, ya que opaca a las anteriores asignaciones. Por lo que el valor para esta $w$ es
+    -2.
+
+    \begin{lstlisting}
+        {with {w 2}
+            {with {x 3}
+                {with {y {+ w x } }
+                    {with { w -2}
+    \end{lstlisting}
+
+    Pasamos al cuerpo del cuarto with, que también es un with. Podemos ver que se vuelve a aplicar un valor a $x$, sin embargo sólo será tomado
+    en cuenta para withs anidados dentro de este with. El valor para la $x$ es -2.
+
+    \begin{lstlisting}
+        {with {w 2}
+            {with {x 3}
+                {with {y {+ w x } }
+                    {with { w -2}
+                        {with {x -3 }
+    \end{lstlisting}
+
+    Finalmente llegamos al cuerpo del 5to with (el cual ya no es un with xd). Podemos ver que devuelve la operación $\{+ \ y \ y\}$. Sin embargo
+    anteriormente ya habiamos obtenido el valor de $y$, el cual era $\{+ \ 2 \ 3\}$. por lo que lo sustituimos en $\{+ \ y \ y\}$ quedandonos
+    $\{+ \ \{+ \ 2 \ 3\} \{+ \ 2 \ 3\}\}$.
+
+    \begin{lstlisting}
+        {with {w 2}
+            {with {x 3}
+                {with {y {+ w x } }
+                    {with { w -2}
+                        {with {x -3 }
+                            {+ y y } } } } } }
+    \end{lstlisting}
+
+    Ahora evaluamos la operación resultante $\{+ \ \{+ \ 2 \ 3\} \{+ \ 2 \ 3\}\} = \{+ \ 5 \ 5\} = 10$
+
+    \item[b.] ¿Pueden haber otros resultados? ¿Por qué?
+    
+    Sí, pueden haber otros resultados, esto debido a que depende del tipo de alcance que tienen los withs ya que existen 2 tipos, dinámico y estático.
+    Dependiendo de cual se use, las variables se pueden buscar desde arriba, o el más cercano hacia abajo lo cual puede dar un resultado diferente en caso
+    de que coloquemos id's iguales.
+            
+    \item[c.] ¿Cuál es el resultado correcto en dado caso de haber más de un posible resultado?
+    
+    Depende de la implementación de la función y del lenguaje de programación, pues si hay más de un resultado correcto es porque el lenguaje lo permite
+    lo cual hace responsable al programador sobre el uso que requiera, o en otras palabras, el resultado correcto será aquel contemplado por el programador
+    para realizar los calculos que requiere.
+            
+\end{enumerate}

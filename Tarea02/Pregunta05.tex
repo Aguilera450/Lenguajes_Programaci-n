@@ -1,0 +1,22 @@
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Ejercicio 02:
+{\textcolor{blue}{5.}} Dadas las siguientes expresiones representadas mediante
+índices de De Bruijin, obtén su respectiva versión usando identificadores de
+variables.
+\begin{lstlisting}
+    {with {1 2 3}
+      {with {4 5 6}
+        {with { {with { { + <:0 1> <:1 2>} {-<:1 1> <:0 0>} }3}}
+          {with {<:0 0>}
+            {+ <:3 2>{+ <:2 1> {+ <:1 0> <:0 0>}}}}}}}
+\end{lstlisting}
+
+Versión usando identificadores de variables:
+
+\begin{lstlisting}
+    {with {{a 1}  {b 2} {c 3}}
+      {with {{d 4} {e 5} {f 6}}
+        {with { {g {with { {h {+ e c}} {i{- b d} }3}}}
+          {with {j g}
+            {+ c{+ e {+ g j}}}}}}}}
+\end{lstlisting}

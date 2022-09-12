@@ -1,0 +1,20 @@
+{\textcolor{blue}{4.}} Convierte las siguientes expresiones a su respectiva versión usando índices de De Bruijn.
+
+\begin{lstlisting}
+    {with {v 2}
+        {with {w 3}
+            {with {x 4}
+                {with {y {+ v {- w x} } }
+                    {with {z {with {v {+ w x } } v } }
+                        {+ y {with {w {- y z } } {- w x } } } } } } } }
+\end{lstlisting} 
+
+Versión con indices de Bruijn
+\begin{lstlisting}
+    {with 2
+        {with 3
+            {with 4
+                {with {+ <: 2 0> {- <: 1 0> <: 0 0> } }
+                    {with {with {+ <: 2 0> <: 1 0>} <: 3 0> }
+                        {+ <: 1 0> {with {- <: 1 0> <: 0 0> } {- <: 3 0> <: 2 0> } } } } } } } }
+\end{lstlisting} 
