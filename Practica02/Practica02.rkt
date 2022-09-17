@@ -63,6 +63,24 @@ Definir las funciones area y perimetro.
     [(rombo? f)
      (/ (* (rombo-D f) (rombo-d f)) 2)]))
 
+#|
+                       Ejercicio 3:
+El tipo de datos Vagon, que debe incluir 4 constructores;
+uno por cada tipo de vagón descrito en el manual de prácticas:
+|#
+;; Tipo de dato Vagon y constructores
+
+(define-type Vagon
+  [dormitorio (camas positive-integer?)]
+  [locomotora (p     positive-integer?)]
+  [pasajeros  (cap   positive-integer?)]
+  [restaurante
+   (mesas    positive-integer?)
+   (personal positive-integer?)])
+
+;; Tipo de dato Tren
+
+
 
 ;; ==================================== Pruebas unitarias ====================================
 ;;                                        Perimetros:
