@@ -30,14 +30,14 @@ Definir las funciones area y perimetro.
 (define (perimetro f)
   (cond
     [(elipse? f)
-     (* pi (- (* 3 (+ (elipse-a f) (elipse-b f)))
-              (sqrt (* (+ (elipse-b f) (* 3 (elipse-a f)))
-                       (+ (elipse-a f) (* 3 (elipse-b f)))))))]
+     (* pi (- (* 3 (+ elipse-a elipse-b))
+              (sqrt (* (+ (elipse-b) (* 3 (elipse-a)))
+                       (+ (elipse-a) (* 3 (elipse-b)))))))]
     [(paralelogramo? f)
-     (+ (* 2 (paralelogramo-a f)) (* 2 (paralelogramo-b f)))]
+     (+ (* 2 (paralelogramo-a)) (* 2 (paralelogramo-b)))]
     [(triangulo? f)
-     (+ (triangulo-a f) (+ (triangulo-b f) (triangulo-c f)))]
+     (+ (triangulo-a) (+ (triangulo-b) (triangulo-c)))]
     [(rectangulo? f)
-     (+ (* 2 (rectangulo-a f)) (* 2 (rectangulo-b f)))]
+     (+ (* 2 (rectangulo-a)) (* 2 (rectangulo-a)))]
     [(rombo? f)
-     (* 4 (rombo-l f))]))
+     (* 4 (rombo-l))]))
