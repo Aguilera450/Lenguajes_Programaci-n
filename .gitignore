@@ -2,6 +2,7 @@
 *.aux
 *.log
 *.bcf
+*.rkt~
 *.tex~
 *.run.xml
 *.gitignore~
