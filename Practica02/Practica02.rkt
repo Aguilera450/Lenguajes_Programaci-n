@@ -99,5 +99,34 @@ Definir las funciones area y perimetro.
   (test (perimetro (elipse 4 3)) 22.103491790916742))
 
 ;;                                          Áreas:
+;; Triángulo
+(define (prueba-area-triangulo1)
+  (test (area (triangulo 2 2 2)) 1.7320508075688772))
 
+(define (prueba-area-triangulo2)
+  (test (area (triangulo 1 2 3)) 0))
 
+;; Rectángulo
+(define (prueba-area-rectangulo1)
+  (test (area (rectangulo 2 2)) 4))
+
+(define (prueba-area-rectangulo2)
+  (test (area (rectangulo 1 4)) 4))
+
+;; Rombo
+(define (prueba-area-rombo)
+  (test (area (rombo 3 4 2)) 4))
+
+;; Paralelogramo
+(define (prueba-area-paralelogramo1)
+  (test (area (paralelogramo 2 2 2)) 4))
+
+(define (prueba-area-paralelogramo2)
+  (test (area (paralelogramo 4 2 2)) 8))
+
+;; Elipse
+(define (prueba-area-elipse1)
+  (test (area (elipse 3 3)) 28.274333882308138))
+
+(define (prueba-area-elipse2)
+  (test (area (elipse 4 3)) 37.69911184307752))
