@@ -62,3 +62,42 @@ Definir las funciones area y perimetro.
      (* pi (* (elipse-a f) (elipse-b f)))]
     [(rombo? f)
      (/ (* (rombo-D f) (rombo-d f)) 2)]))
+
+
+;; ==================================== Pruebas unitarias ====================================
+;;                                        Perimetros:
+;; Triángulo
+(define (prueba-perimetro-triangulo1)
+  (test (perimetro (triangulo 2 2 2)) 6))
+
+(define (prueba-perimetro-triangulo2)
+  (test (perimetro (triangulo 1 2 3)) 6))
+
+;; Rectángulo
+(define (prueba-perimetro-rectangulo1)
+  (test (perimetro (rectangulo 2 2)) 8))
+
+(define (prueba-perimetro-rectangulo2)
+  (test (perimetro (rectangulo 1 3)) 8))
+
+;; Rombo
+(define (prueba-perimetro-rombo)
+  (test (perimetro (rombo 3 4 2)) 12))
+
+;; Paralelogramo
+(define (prueba-perimetro-paralelogramo1)
+  (test (perimetro (paralelogramo 2 2 2)) 8))
+
+(define (prueba-perimetro-paralelogramo2)
+  (test (perimetro (paralelogramo 4 2 2)) 12))
+
+;; Elipse
+(define (prueba-perimetro-elipse1)
+  (test (perimetro (elipse 3 3)) 18.84955592153876))
+
+(define (prueba-perimetro-elipse2)
+  (test (perimetro (elipse 4 3)) 22.103491790916742))
+
+;;                                          Áreas:
+
+
