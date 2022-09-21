@@ -1,0 +1,30 @@
+  \begin{comment}
+    \begin{center}
+      \begin{tabular}{|c|}
+        &&                                         \\  \hline 
+        &$x\; \; -3$&                              \\  \hline 
+        &$b\; \{-\; a\: a\}$&                      \\  \hline
+        &$a\; \{-\; 2\: 2\}$&                      \\  \hline
+        &foo\; fun\; ${x}\; \;  \{-\; x\: b\}$&    \\  \hline
+        &$b\; \; \{+\; a\: a\}$&                   \\  \hline
+        &$a\; \; \{+\; 2\: 2\}$&                   \\  \hline
+      \end{tabular}
+      \caption{Evaluación Perezosa.}
+    \end{center}
+  \end{comment}
+
+
+  \begin{comment}
+    \begin{center}
+      \begin{tabular}{|c|}
+        &  &                                       \\  \hline 
+        &$x\; \; -3$&                              \\  \hline 
+        &$b\; \; 0$&                               \\  \hline
+        &$a\; \; 0$&                               \\  \hline
+        &foo\; fun\; ${x}\; \;  \{-\; x\: 8\}$&    \\  \hline
+        &$b\; \; \{2a\; =\; 8\}$&                  \\  \hline
+        &$a\; \; 4$&                               \\  \hline
+      \end{tabular}
+    \end{center}
+  \end{comment}
+  
