@@ -80,7 +80,82 @@ uno por cada tipo de vagón descrito en el manual de prácticas:
 
 ;; Tipo de dato Tren
 
+#|     Ejercicio 4
+|#
 
+;; Es el segundo punto de los ejercicios del 4.
+(define-type Tren
+  [tren-loc (vagon Vagon?)]
+  [tren (loci locomotora?)
+        (resto Tren?)
+        (locd locomotora?)]
+  [tren-t (vagon Vagon?)
+        (resto Tren?)]
+  [tren-f (resto Tren?)
+        (vagon Vagon?)]
+  )
+
+(define (ac-potloc tren)
+  (cond
+    [(tren-loc? tren)(let (
+         [vagon (tren-loc-vagon tren)])
+         (if (locomotora? vagon)
+             (locomotora-p vagon)
+             0))]
+    [(tren? tren)(let (
+         [loci (tren-loci tren)]
+         [locd (tren-locd tren)]
+         [restot (tren-resto tren)])
+         (+ (locomotora-p loci)
+            (locomotora-p locd)
+            (ac-potloc restot)))]
+    [(tren-t? tren)(let (
+         [vagon (tren-t-vagon tren)]
+         [restot (tren-t-resto tren)])
+         (+ (ac-potloc restot)
+         (if (locomotora? vagon)
+             (locomotora-p vagon)
+             0)))]
+    [(tren-f? tren)(let (
+         [restot (tren-f-resto tren)]
+         [vagon (tren-f-vagon tren)])
+         (+ (ac-potloc restot)
+            (if (locomotora? vagon)
+                (locomotora-p vagon)
+                0)))])
+  )
+
+(define (cuenta-vagones-noloc tren)
+  (cond
+    [(tren-loc? tren)(let (
+         [vagon (tren-loc-vagon tren)])
+         (if (locomotora? vagon)
+             0
+             1))]
+         [(tren? tren)(let (
+              [loci (tren-loci tren)]
+              [locd (tren-locd tren)]
+              [restot (tren-resto tren)])
+              (cuenta-vagones-noloc restot))]
+         [(tren-t? tren)(let (
+              [vagon (tren-t-vagon tren)]
+              [resto (tren-t-resto tren)])
+              (+ (cuenta-vagones-noloc resto)
+              (if (locomotora? vagon)
+                  0
+                  1)))]
+         [(tren-f? tren)(let (
+              [vagon (tren-f-vagon tren)]
+              [restot (tren-f-resto tren)])
+              (+ (cuenta-vagones-noloc restot)
+              (if(locomotora? vagon)
+                 0
+                 1)))])
+  )
+
+(define (arrastre-usado tren)
+  (/ (* (cuenta-vagones-noloc tren) 100 ) (ac-potloc tren))
+ )
 
 ;; ==================================== Pruebas unitarias ====================================
 ;;                                        Perimetros:
