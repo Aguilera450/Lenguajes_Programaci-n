@@ -9,7 +9,15 @@ $b$) \begin{lstlisting}
             {foo } } } } }
 \end{lstlisting}
 
+Primero construyamos las pilas de ambientes, con
+respecto al régimen de evaluación, esto es 
+
 %%%%%%%%%%%%%%%%%%%%%%  Glotona      %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+$*$) Con evaluación glotona:
+  \begin{center}
+    \includegraphics[scale=0.3]{./GlotonaB}
+  \end{center}
+
 \begin{enumerate}
   \item Evaluación glotona y alcance estático.
   \begin{lstlisting}
@@ -30,8 +38,14 @@ $b$) \begin{lstlisting}
   {6}
   = 6
 \end{lstlisting}
+
 %%%%%%%%%%%%%%%%%%%%%%  Perezosa      %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \item Evaluación perezosa y alcance estático.
+$*$) Con evaluación perezosa:
+  \begin{center}
+    \includegraphics[scale=0.3]{./PerezosaB}
+  \end{center}
+
+\item Evaluación perezosa y alcance estático.
   \begin{lstlisting}
   {foo }
   {foo {}{-a b}}
