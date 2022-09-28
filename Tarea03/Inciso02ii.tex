@@ -1,4 +1,52 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Inciso 02ii:
 $ii$) Evaluación glotona y sustitución. \newline
 
+\begin{lstlisting}
+>  {with {a {0} }
+    {with {b { - a a } }
+      {with {foo { fun {x} {- a b } } }
+        {with {a {+ -4 -4 } }
+          {with {b {+ a a } }
+            {foo  } } } } } }
+
+> {with {a {0} }
+    {with {b { - (0) (0)} }
+      {with {foo { fun {x} {- (0) b } } }
+        {with {a {+ -4 -4 } }
+          {with {b {+ a a } }
+            {foo  } } } } } }
+
+> {with {b {0} }
+      {with {foo { fun {x} {- (0) (0) } } }
+        {with {a {+ -4 -4 } }
+          {with {b {+ a a } }
+            {foo  } } } } }
+
+> {with {foo { fun {x} {- (0) (0) } } }
+        {with {a {+ -4 -4 } }
+          {with {b {+ a a } }
+            {foo  } } } }
+
+> {with {foo { fun {x} {0} } }
+        {with {a {+ -4 -4 } }
+          {with {b {+ a a } }
+            {foo  } } } }
+
+> {with {foo { fun {x} {0} } }
+        {with {a {-8} }
+          {with {b {+ a a } }
+            {foo  } } } }
+
+> {with {foo { fun {x} {0} } }
+        {with {a {-8} }
+          {with {b {+ (-8) (-8) } }
+            {foo  } } } }
+
+> {with {foo { fun {x} {0} } }
+        {with {a {-8} }
+          {with {b {-16} }
+            {foo  } } } }
+
+> {0}
+\end{lstlisting}
 
