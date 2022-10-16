@@ -1,18 +1,17 @@
-( define-type AST
-              [ id ( i symbol? ) ]
-[ num ( n number?) ]
-[ bool ( b b o o l e a n ? ) ]
-[ op ( f p r o c e d u r e ? ) ( a r g s ( l i s t o f AST ? ) ) ]
-[ w i t h ( b i n d i n g s ( l i s t o f b i n d i n g ? ) ) ( body AST ? ) ]
-[ w i t h ∗ ( b i n d i n g s ( l i s t o f b i n d i n g ? ) ) ( body AST ? ) ]
-[ f u n ( pa rams ( l i s t o f symb ol ? ) ) ( body AST ? ) ]
-[ app ( f u n AST? ) ( a r g s ( l i s t o f AST ? ) ) ]
+(define-type AST
+         [id (i symbol?)]
+         [num (n number?)]
+         [bool (b boolean?)]
+         [op (f procedure?) (args (listof AST?))]
+         [with (bindings (listof binding?)) (body AST?)]
+         [with∗ (bindings (listof binding?)) (body AST?)]
+         [fun (params (listof symbol?)) (body AST?)]
+         [app (fun AST?) (args (listof AST?))]
 
 )
-( d e f i n e −t y p e B i n d i n g
 
-[ b i n d i n g ( i d symb ol ? ) ( v a l u e AST ? ) ]
-
+(define−type Binding
+        [binding (id symbol?) (value AST?)]
 )
 
 
@@ -61,3 +60,19 @@
     ; La expresión no puede tener IDs
     [else fwae-ast])
   )
+
+#|
+      Esto es nuevo
+|#
+(define (interp fwae-ast)
+    (cond
+      [(with? fwae-ast) (let* (
+        [bdgs (with-bindings fwae-ast)]
+        [primeros-bdgs (reverse (rest (reverse bdgs)))]
+        [ultimo-bdg (last bdgs)])
+        (foldl (lambda (bdg)
+          (subst(with-body fwae-ast) (binding-id bdg) (binding-value bdg)))
+          ultimo-bdg
+          primeros-bdg
+          ))])
+)
