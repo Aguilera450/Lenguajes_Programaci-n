@@ -1,4 +1,9 @@
 #lang plai
+
+#|
+Utilice los siguientes tipos de datos para representar los AST y las ataduras
+(bindings) entre símbolos identificadores y sus valores FWAE:
+|#
 (define-type AST
   [id (i symbol?)]
   [num (n number?)]
@@ -13,7 +18,14 @@
 (define-type Binding
   [binding (id symbol?) (value AST?)])
 
-
+#|	Ejercicio 1
+Defina la función (parse sexp), la cual recibe una expresión simbólica (symbolic
+expression, s-expression); esto es, la expresión puede ser un número, un símbolo
+o una lista de expresiones simbólicas. (parse sexp) debe construir un Árbol de
+Sintaxis Abstracta (Abstract Syntax Tree - AST) a partir de la s-expression si
+es una expresión válida en el lenguaje FWAE. En otro caso, debe arrojar un error.
+|#
+;; parse: s-expression -> AST
 (define (parse sexp)
   (define (parse-op opsexp)
     (let([operador (case (first opsexp)
@@ -45,7 +57,7 @@
                     [(with*) (with* (toLB (second sexp)) (parse (third sexp)))]
                     [(fun) (fun (second sexp) (parse (third sexp)))]
                     [(app) (app (parse (second sexp)) (map parse (third sexp)))])]))
- 
+
 
 
 
@@ -53,8 +65,14 @@
 (parse '(app (fun (a b c d) 1) ((+ 1 1) b c)))
 (parse '(+ 1 1))
 
-
-;; Ejercicio 2
+#|	Ejercicio 2
+Defina la función (subst fwae-expr sub-id value) que realiza la sustitución
+fwae-expr[sub-id:=value]; es decir, reemplaza cada ocurrencia de la variable
+sub-id en la expresión fwae-expr por otra expresión value. Cuide el alcance de
+las variables conforme a las expresiones with, with* y app/fun (puesto que el
+alcance es estático).
+|#
+;; subst: AST, symbol, AST -> AST
 
 (define (subst fwae-ast sub-id valor)
   (cond
@@ -85,18 +103,19 @@
 ;;(map binding? ('a (num 2)))
 ;;(alv '(1 2 3))
 ;;(AST? (with (list (binding 'a (num 1)) (binding 'b (num 2))) (num 1)))
-#|
-      Esto es nuevo
+
+#|	Ejercicio 3
+Defina la función (interp fwae-expr) que evalúa la expresión FWAE dada.
+Para evaluar expresiones with, with* y app es necesario utilizar la función subst.
 |#
+;; interp: AST -> number U boolean U AST-fun
 (define (interp fwae-ast)
     (cond
-      [(with? fwae-ast) (let* (
-        [bdgs (with-bindings fwae-ast)]
-        [primeros-bdgs (reverse (rest (reverse bdgs)))]
-        [ultimo-bdg (last bdgs)])
-        (foldl (lambda (bdg)
-          (subst(with-body fwae-ast) (binding-id bdg) (binding-value bdg)))
-          ultimo-bdg
-          primeros-bdg
-          ))])
+        [(with? fwae-ast) (interp (foldl
+			(lambda (bdg expr-res)
+				(subst expr-res (binding-id bdg) (binding-value bdg))
+			)
+			(with-body fwae-ast)
+            (with-bindings fwae-ast)))]
+    )
 )
