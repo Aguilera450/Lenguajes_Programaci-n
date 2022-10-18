@@ -99,7 +99,10 @@ alcance es estático).
     (with (map renamed (with-bindings fwae-ast)) (with-body fwae-ast))
     (with (map renamed (with-bindings fwae-ast)) (subst (with-body fwae-ast) sub-id valor)))]
 
-    [(with*? fwae-ast) "With feo"]
+    [(with*? fwae-ast)
+     (if (checkout (with*-bindings fwae-ast) sub-id)
+         (with* (map renamed (with*-bindings fwae-ast)) (with*-body fwae-ast))
+         (with* (map renamed (with*-bindings fwae-ast)) (subst (with*-body fwae-ast) sub-id valor)))]
 
     [(fun? fwae-ast) (if (member (id-i sub-id) (fun-params fwae-ast))
                          1;;(rempla (id-i sub-id) valor (fun-body fwae-ast))
