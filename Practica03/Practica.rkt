@@ -73,36 +73,44 @@ las variables conforme a las expresiones with, with* y app/fun (puesto que el
 alcance es estático).
 |#
 ;; subst: AST, symbol, AST -> AST
-
 (define (subst fwae-ast sub-id valor)
+
+  ;;revisa la expresion
+  (define (checkout lista id-x)
+    (if (empty? lista) #f
+        (let ([aux-expr (first lista)])
+          (if (equal? (binding-id aux-expr) id-x) #t
+              (checkout (rest lista) id-x))))
+  )
+
+  ;; renombra la expresión.
+  (define (renamed lista)
+    (binding (binding-id lista) (subst (binding-value lista) sub-id valor))
+  )
+
   (cond
-    [(id? fwae-ast) (if (symbol=? (id-i sub-id) (id-i fwae-ast))
-                        valor
-                        fwae-ast)]
+    [(id? fwae-ast)
+    (if (symbol=? (id-i sub-id) (id-i fwae-ast)) valor fwae-ast)]
+
     [(op? fwae-ast) (op (op-f fwae-ast)
                         (map (lambda (arg) (subst arg sub-id valor)) (op-args fwae-ast)))]
-    [(with? fwae-ast) "With normalito"]
+
+    [(with? fwae-ast) (if (checkout (with-bindings fwae-ast) sub-id)
+    (with (map renamed (with-bindings fwae-ast)) (with-body fwae-ast))
+    (with (map renamed (with-bindings fwae-ast)) (subst (with-body fwae-ast) sub-id valor)))]
+
     [(with*? fwae-ast) "With feo"]
+
     [(fun? fwae-ast) (if (member (id-i sub-id) (fun-params fwae-ast))
                          1;;(rempla (id-i sub-id) valor (fun-body fwae-ast))
                          fwae-ast)]
-    [(app? fwae-ast) (app (fun))]
+    [(app? fwae-ast)
+    (app (subst (app-fun fwae-ast) sub-id valor) (map (subst op sub-id valor) (app-args fwae-ast)))]
+
     [else fwae-ast])
   )
 
-;;(subst (id 'a) (id 'a) (num 1))
-;;(subst (num 1) (id 'a) (num 4))
-(subst (fun (list 'a 'b) (id 'a)) (id 'a) (num 1))
-;;(subst (fun (list 'a 'b) (op + (list (id 'a) (num 1)))) (id 'a) (num 1))
-;;(rempla 'a 1 '(a 'b 1))
 
-;;(subst (with (list (binding 'a (num 1))) (num 1)) (id 'a) (num 1))
-;;(subst (with (list (binding 'a (num 1)) (binding 'b (num 2))) (num 1) ) 'b (num 2))
-;;(subst (op + (list (num 1) (num 1))) 'a 1)
-
-;;(map binding? ('a (num 2)))
-;;(alv '(1 2 3))
-;;(AST? (with (list (binding 'a (num 1)) (binding 'b (num 2))) (num 1)))
 
 #|	Ejercicio 3
 Defina la función (interp fwae-expr) que evalúa la expresión FWAE dada.
