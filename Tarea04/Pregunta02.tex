@@ -8,9 +8,22 @@ para cambiar los términos de las variables de ligado.
     \textbf{Solución:}
     \begin{eqnarray*}
         \lambda_a . \lambda_b . (\lambda_a . b \; \lambda_b . a)
+        \rightarrow_{\alpha} \lambda_x . \lambda_y (\lambda_z . y \lambda_w z)
     \end{eqnarray*}
 %%%%%%%%%%%%%%%%%%%%%%%%      Inciso b    %%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \item $\lambda a.(a(\lambda b.(\lambda a.a\; b)a))$
+    
+    \textbf{Solución:}
+    \begin{eqnarray*}
+        \lambda_a .(a(\lambda_b .(\lambda_a .a\; b)a))
+        \rightarrow_{\alpha} \lambda_x .(x(\lambda_y .(\lambda_w .w\; y)x))
+    \end{eqnarray*}
 %%%%%%%%%%%%%%%%%%%%%%%%      Inciso c    %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \item $\lambda x.(\lambda y.x\; \lambda y(\lambda x.x \; y))$
+    \item $\lambda x.(\lambda y.x\; \lambda y.(\lambda x.x \; y))$
+    
+    \textbf{Solución:}
+    \begin{eqnarray*}
+        \lambda_x .(\lambda_y .x\; \lambda_y .(\lambda_x .x \; y))
+        \rightarrow_{\alpha} \lambda_a .(\lambda_b .a\; \lambda_c .(\lambda_e .e \; c))
+    \end{eqnarray*}
 \end{enumerate}
