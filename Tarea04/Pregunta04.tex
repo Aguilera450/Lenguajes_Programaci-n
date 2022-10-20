@@ -3,7 +3,27 @@ Realiza la representación de los booleanos en el cálculo
 $\lambda$ según la representación de los Numerales de Church.
 \begin{enumerate}[a)]
 %%%%%%%%%%%%%%%%%%%%%%%%      Inciso a    %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \item Define la función disyunción $\leftrightarrow$ (equivalencia) sobre los boolenos.
+    \item Define la función disyunción $\leftrightarrow$ (equivalencia) sobre los boolenos.\\
+    Sabemos que a partir de las leyes de equivalencia de la lógica proposicional, tenemos que:
+    \begin{equation*}
+        a \leftrightarrow b \equiv (a \rightarrow b) \land (b \rightarrow a)\quad \quad \quad \quad
+            a \rightarrow b \equiv \neg a \lor b \quad \quad \quad
+            b \rightarrow a \equiv \neg b \lor a
+        \end{equation*}
+        Por lo que finalmente tenemos que:
+        $a \leftrightarrow b \equiv (\neg a \lor b) \land (\neg b \lor a )$.\\
+
+        -- Como en clase se vio que $and$ queda definido de la siguiente forma:\\
+        $\land \; =_{def} \lambda a. \lambda b.((ab)F)$.\\
+        Definimos las siguientes funciones como:\\
+        $\lor \; =_{def} \lambda a.\lambda b. ((aT)b)$.\\
+        $\neg \; =_{def} \lambda a.aFT$.\\
+        $\rightarrow \; =_{def}(\lambda a.\lambda b.\lor (\neg a)b)$.\\
+        $\leftrightarrow \;
+        =_{def} (\lambda a. \lambda b. \land(\rightarrow ab)(\rightarrow ba))$
 %%%%%%%%%%%%%%%%%%%%%%%%      Inciso b    %%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \item Define la función $xor$ (disyunción exclusiva) sobre los booleanos.
+    \begin{equation*}
+            xor =_{def} \lambda a. \lambda b.(a \; (bFT) \; (bTF))
+        \end{equation*}
 \end{enumerate}
