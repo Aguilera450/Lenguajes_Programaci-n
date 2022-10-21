@@ -3,13 +3,13 @@ Aplica $\alpha$-conversiones en cada expresión
 para cambiar los términos de las variables de ligado.
 \begin{enumerate}[a)]
 %%%%%%%%%%%%%%%%%%%%%%%%      Inciso a    %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \item $\lambda a.\lambda b.(\lambda a.b \; \lambda b.a)$
+    \item $\lambda_a .\lambda_b .((\lambda_a .b) \; (\lambda_b .a))$
     
     \textbf{Solución:}
     \begin{eqnarray*}
-        \lambda_a . \lambda_b . (\lambda_a . b \; \lambda_b . a)
-        \rightarrow_{\alpha} \lambda_x . \lambda_y (\lambda_z . y \lambda_w z)
-    \end{eqnarray*}
+        \lambda_a . \lambda_b . ((\lambda_a . b) \; (\lambda_b . a))
+        \rightarrow_{\alpha} \lambda_x . \lambda_y . ((\lambda_w . y) \; (\lambda_z . x))
+        \end{eqnarray*}
 %%%%%%%%%%%%%%%%%%%%%%%%      Inciso b    %%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \item $\lambda a.(a(\lambda b.(\lambda a.a\; b)a))$
     
