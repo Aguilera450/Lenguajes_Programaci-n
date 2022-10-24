@@ -14,11 +14,42 @@ $\Omega\; =_{def} (\lambda a.aa) (\lambda a.aa)$
 
     \textbf{Solución:}
     \begin{eqnarray*}
-        \lambda_a .aK\Omega \equiv \lambda_a .a (\lambda_a .a)((\lambda a.aa) (\lambda a.aa))
-        \rightarrow_{\beta}
+        \lambda_a .aK\Omega &\equiv& \lambda_a .a
+        (\lambda_a . \lambda_b . a)
+        ((\underbrace{\lambda a.aa}_{Redex}) (\lambda a.aa))\\
+        &\rightarrow_{\beta}&
+        \lambda_a .a (\lambda_a .a)(\underbrace{(\lambda a.aa) (\lambda a.aa)}_{Reducto}).
     \end{eqnarray*}
+    Esta $\lambda$-función diverge, como se puede observar en la $\beta$-reducción anterior.
 %%%%%%%%%%%%%%%%%%%%%%%%      Inciso b    %%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \item $(\lambda a.a(ll))c$
+
+    \textbf{Solución:}
+    \begin{eqnarray*}
+        (\lambda_a .a(ll))c &\equiv& \lambda_a . a((\underbrace{\lambda_a .a}_{Redex})
+        (\lambda_a .a))c\\
+        &\rightarrow_{\beta}& \lambda_a .
+        a(\underbrace{\lambda_a .a}_{\text{Reducto y Redex}})c\\
+        &\rightarrow_{\beta}& \underbrace{\lambda_a . a}_{Redex} \underbrace{c}_{Reducto}\\
+        &\rightarrow_{\beta}& \underbrace{c}_{Reducto}.
+    \end{eqnarray*}
 %%%%%%%%%%%%%%%%%%%%%%%%      Inciso c    %%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \item $(\lambda d.\lambda e.(\lambda f.f(\lambda a.ad))e)b(\lambda c.\lambda b.cb)$
+
+    \textbf{Solución:}
+    \begin{eqnarray*}
+        (\lambda_d .\lambda_e .(\underbrace{\lambda_f .f}_{Redex}
+        (\lambda_a .ad))e)b(\lambda_c .\lambda_b .cb)
+        &\rightarrow_\beta&
+        (\lambda_d .\lambda_e
+        .(\underbrace{\overbrace{\lambda_a .a}^{Redex}d}_{Reducto})e)
+        b(\lambda_c .\lambda_b .cb)\\
+        &\rightarrow_\beta& (\lambda_d .\overbrace{\lambda_e .\underbrace{e}_{Reducto}}^{Redex}
+        (d) b(\lambda_c .\lambda_b .cb)\\
+        &\rightarrow_\beta& (\overbrace{\lambda_d .\underbrace{d}_{Reducto}}^{Redex}
+        (b)(\lambda_c .\lambda_b .cb)\\
+        &\rightarrow_\beta& \underbrace{b}_{Reducto}
+        ((\underbrace{\lambda_c .\lambda_b .c}_{Redex})b)\\
+        &\rightarrow_\beta& b \underbrace{\lambda_b . b}_{Reducto}.
+    \end{eqnarray*}
 \end{enumerate}
