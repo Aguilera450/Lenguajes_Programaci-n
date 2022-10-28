@@ -21,9 +21,76 @@ $\lambda$ según la representación de los Numerales de Church.
         $\rightarrow \; =_{def}(\lambda a.\lambda b.\lor (\neg a)b)$.\\
         $\leftrightarrow \;
         =_{def} (\lambda a. \lambda b. \land(\rightarrow ab)(\rightarrow ba))$
+        \newline
+        
+        A continuación se muestra  una ejecución donde tomamos los valores $T$ y $T$. Esto es,
+        \begin{eqnarray*}
+                (((\lambda a. \lambda b. \land(\rightarrow ab)(\rightarrow ba)) T) T)
+                &\rightarrow_{\beta}&
+                (( \lambda b. \land(\rightarrow Tb)(\rightarrow bT)) T) \\
+                &\rightarrow_{\beta}&
+                ( \land(\rightarrow TT)(\rightarrow TT)) \\
+                &\rightarrow_{\beta}&
+                (\land((\lambda a.\lambda b.\lor (\neg a)b) TT)(\rightarrow TT))\\
+                &\rightarrow_{\beta}&
+                (\land((\lambda b.\lor (\neg T)b) T)(\rightarrow TT))\\
+                &\rightarrow_{\beta}&
+                (\land(\lor (\neg T)T)((\lambda a.\lambda b.\lor (\neg a)b) TT))\\
+                &\rightarrow_{\beta}&
+                (\land(\lor (\neg T)T)((\lambda b.\lor (\neg T)b) T))\\
+                &\rightarrow_{\beta}&
+                (\land(\lor (\neg T)T)(\lor (\neg T)T))\\
+                &\rightarrow_{\beta}&
+                (\land(\lor ((\lambda a.aFT) T)T)(\lor (\neg T)T))\\
+                &\rightarrow_{\beta}&
+                (\land(\lor (TFT)T)(\lor (\neg T)T))\\
+                &\rightarrow_{\beta}&
+                (\land(\lor ((TFT)T)(\lor ((\lambda a.aFT) T)T))\\
+                &\rightarrow_{\beta}&
+                (\land(\lor ((TFT)T)(\lor ((TFT)T))\\
+                &\rightarrow_{\beta}&
+                (\land((\lambda a.\lambda b. ((aT)b)) (TFT)T)\\
+                & & (\lor ((TFT)T))\\
+                &\rightarrow_{\beta}&
+                (\land((\lambda b. ((TT)b)) ((FT)T)\\
+                & & (\lor ((TFT)T))\\
+                &\rightarrow_{\beta}&
+                (\land \underbrace{(((TT)F) ((T)T)}_{\alpha}\\
+                & & \underbrace{(\lor ((TFT)T))}_{\text{Eventualmente } \alpha}\\
+                &\rightarrow_{\beta}&
+                (\land(((TT)F) ((T)T)(((TT)F) ((T)T))))\\
+                &\rightarrow_{\beta}&
+                (\lambda a. \lambda b.((ab)F) (((TT)F) ((T)T)(((TT)F) ((T)T))))\\
+                &\rightarrow_{\beta}&
+                (\lambda b.((Tb)F) (((T)F) ((T)T)(((TT)F) ((T)T))))\\
+                &\rightarrow_{\beta}&
+                (((TT)F) ((F) ((T)T)(((TT)F) ((T)T))))\\
+                &\rightarrow_{\beta}& (((\lambda_a .(\lambda_b .a)T)F) ((F) ((T)T)(((TT)F) ((T)T))))\\
+                &\rightarrow_{\beta}& (((\lambda_b .T)F) ((F) ((T)T)(((TT)F) ((T)T))))\\
+                &\rightarrow_{\beta}& T
+        \end{eqnarray*}
+        lo cual es cierto ($T \leftrightarrow T$ es $T$).
 %%%%%%%%%%%%%%%%%%%%%%%%      Inciso b    %%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \item Define la función $xor$ (disyunción exclusiva) sobre los booleanos.
     \begin{equation*}
-            xor =_{def} \lambda a. \lambda b.(a \; (bFT) \; (bTF))
-        \end{equation*}
+            xor =_{def} \lambda a. \lambda b.((a \; (\text{not } b)) \; b))
+    \end{equation*}
+    A continuación se muestra  una ejecución donde tomamos los valores $T$ y $T$. Esto es,
+    \begin{eqnarray*}
+        (((\lambda a. \lambda b.((a \; (\text{not } b)) \; b)))T)T) &\rightarrow_{\beta}&
+        ((\lambda b.((T \; (\text{not } b)) \; b)))T)\\
+        &\rightarrow_{\beta}&
+        (T \; (\text{not } T)) \; T)\\
+        &\rightarrow_{\beta}&
+        (T \; (\text{not } T)) \; T)\\
+        &\rightarrow_{\beta}&
+        ((\lambda_a .(\lambda_b .a)) \; (\text{not } T)) \; T)\\
+        &\rightarrow_{\beta}&
+        ((\lambda_b . \text{not } T) \; T)\\
+        &\rightarrow_{\beta}&
+        (((\lambda_b . F) \; T)\\
+        &\rightarrow_{\beta}&
+        F\\ 
+    \end{eqnarray*}
+    Lo cual es cierto.
 \end{enumerate}
