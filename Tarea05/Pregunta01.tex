@@ -1,13 +1,9 @@
 \textbf{\textcolor{blue}{1.}} \Large
 Utiliza el paso de parámetros que se indica para evaluar la siguiente expresión.
-\begin{enumerate}[a.]
-    \item Paso de parámetros por valor.
-    \item Paso de parámetros por referencia.
-\end{enumerate}
 \begin{lstlisting}
   {with{{a 8}
         {b -8}
-        {swap{fun{xy}
+        {swap{fun{x y}
               {with{{tmp x}}
                 {seqn{set x y}
                     {set y tmp}}}}}}
@@ -15,3 +11,101 @@ Utiliza el paso de parámetros que se indica para evaluar la siguiente expresió
    {seqn {swap a b}
         {-a{+b a}}}}
 \end{lstlisting}
+
+\begin{enumerate}[a.]
+%%%%%%%%%%%%%%%%%%        Inciso A        %%%%%%%%%%%%%%%%%%%%%
+\item Paso de parámetros por valor.\\
+%%%%% Ambiente // Tabla
+Se tiene la representación del ambiente como:
+
+\begin{table}[h]
+\centering
+%%\extrarowheight = -0.5ex
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{ |c | c c |}
+\hline
+\textbf{swap} &
+\textbf{ \{fun\{x y\}\{with\{\{tmp x\}\}\{seqn\{set x y\}\{set y tmp\}\}\}\} } & 0x12\\
+\hline
+b & -8  & 0x11\\
+\hline
+a & 8  & 0x10\\
+\hline
+\end{tabular}
+\end{table}
+
+Evaluando \{swap a b\}, se tiene que:\\
+
+\{fun\{x y\}\{with\{\{tmp x\}\}\{seqn\{set x y\}\{set y tmp\}\}\} 8 -8\} \\
+\{with\{\{tmp 8\}\}\{seqn\{set x -8\}\{set y tmp\}\}\} \\
+\{seqn\{set x -8\}\{set y 8\}\} \\
+\{set x -8\} // Ahora $x=a=-8$\\
+\{set y 8\} // Ahora $y=b=8$\\
+
+Donde sus parámetros son:
+\begin{itemize}
+    \item Parámetro Formales: $x \; y$
+    \item Parámetro Reales: $0x10 \; a=8$ y $0x11 \; b=-8$
+\end{itemize}
+
+Ahora se puede evaluar \{-a\{+b a\}\}, se tiene que:\\
+\{- 8\{+b 8\}\} \\
+\{- 8\{+ (-8) 8\}\} \\
+\{- 8\{0\}\} = 8 \\
+
+%%%%%%%%%%%%%%%%%%        Inciso B        %%%%%%%%%%%%%%%%%%%%%
+\newpage
+\item Paso de parámetros por referencia.\\
+Se tiene la representación del ambiente como:
+
+\begin{table}[h]
+\centering
+%%\extrarowheight = -0.5ex
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{ |c | c c |}
+\hline
+\textbf{swap} &
+\textbf{ \{fun\{x y\}\{with\{\{tmp x\}\}\{seqn\{set x y\}\{set y tmp\}\}\}\} } & 0x12\\
+\hline
+b & -8  & 0x11\\
+\hline
+a & 8  & 0x10\\
+\hline
+\end{tabular}
+\end{table}
+Evaluando \{swap a b\}, se tiene que:\\
+
+\{fun\{x y\}\{with\{\{tmp x\}\}\{seqn\{set x y\}\{set y tmp\}\}\} 8 -8\} \\
+\{with\{\{tmp 8\}\}\{seqn\{set x -8\}\{set y tmp\}\}\} \\
+\{seqn\{set x -8\}\{set y 8\}\} \\
+\{set x -8\} // Ahora $x=a=-8$\\
+\{set y 8\} // Ahora $y=b=8$\\
+
+Por lo que modificamos el ambiente, quedando como:\\
+\begin{table}[h]
+\centering
+%%\extrarowheight = -0.5ex
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{ |c | c c |}
+\hline
+\textbf{swap} &
+\textbf{ \{fun\{x y\}\{with\{\{tmp x\}\}\{seqn\{set x y\}\{set y tmp\}\}\}\} } & 0x12\\
+\hline
+b & 8  & 0x11\\
+\hline
+a & -8  & 0x10\\
+\hline
+\end{tabular}
+\end{table}
+
+Donde sus parámetros son:
+\begin{itemize}
+    \item Parámetro Formales: $x \; y$
+    \item Parámetro Reales: $0x10 \; a=-8$ y $0x11 \; b=8$
+\end{itemize}
+
+Ahora se puede evaluar \{-a\{+b a\}\}, se tiene que:\\
+\{- (-8)\{+b (-8)\}\} \\
+\{- (-8)\{+ 8 (-8)\}\} \\
+\{- (-8)\{0\}\} = -8 \\
+\end{enumerate}
