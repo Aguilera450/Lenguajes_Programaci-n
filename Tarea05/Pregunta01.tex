@@ -1,0 +1,17 @@
+\textbf{\textcolor{blue}{1.}} \Large
+Utiliza el paso de parámetros que se indica para evaluar la siguiente expresión.
+\begin{enumerate}[a.]
+    \item Paso de parámetros por valor.
+    \item Paso de parámetros por referencia.
+\end{enumerate}
+\begin{lstlisting}
+  {with{{a 8}
+        {b -8}
+        {swap{fun{xy}
+              {with{{tmp x}}
+                {seqn{set x y}
+                    {set y tmp}}}}}}
+
+   {seqn {swap a b}
+        {-a{+b a}}}}
+\end{lstlisting}
