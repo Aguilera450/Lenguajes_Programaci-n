@@ -9,7 +9,6 @@
   
   (if (empty? list2)
       empty
-      (cons
-       (cons (first list2) (ocurrencia list1 (first list2)))
-       (ocurrencias list1 (rest list2))))
+      (cons (cons (first list2) (ocurrencia list1 (first list2)))
+            (ocurrencias list1 (rest list2))))
 )
