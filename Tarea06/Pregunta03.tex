@@ -1,0 +1,8 @@
+\Large\textbf{\textcolor{blue}{3.}}
+Evalúa el siguiente código en el lenguaje de programación \code{Racket}. Explica su resultado 
+y da la continuación asociada a evaluar, usando la notación $\lambda\uparrow$
+\begin{lstlisting}
+>(define c #f)
+>(+ 1 (+ 2 (+ 3 (+ (let/cc k ( set! c k) 4) 5))))
+>(c 10)
+\end{lstlisting}

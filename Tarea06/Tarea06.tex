@@ -1,0 +1,162 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,mexico]{babel}
+\usepackage[margin=2.3cm]{geometry}
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{fancyhdr}
+\usepackage{lipsum}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{array}
+\usepackage{float}
+
+% >
+\usepackage{ tipa }
+
+%\usepackage{multirow}
+\usepackage[spanish,es-tabla]{babel}
+
+% Comentario en varias líneas
+\usepackage{comment}
+
+% Importar código de algún lenguaje
+%\usepackage{listings}
+%\lstset{
+%  language=Scheme
+%}
+\usepackage{xcolor}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+%\lstdefinestyle{mystyle}{
+%    backgroundcolor=\color{backcolour},
+%    commentstyle=\color{codegreen},
+%    keywordstyle=\color{magenta},
+%    numberstyle=\tiny\color{codegray},
+%    stringstyle=\color{codepurple},
+%    basicstyle=\ttfamily\footnotesize,
+%    breakatwhitespace=false,
+%    breaklines=true,
+%    captionpos=b,
+%    keepspaces=true,
+%    numbers=left,
+%    numbersep=5pt,
+%    showspaces=false,
+%    showstringspaces=false,
+%    showtabs=false,
+%    tabsize=2
+%}
+
+%\lstset{style=mystyle}
+
+% Evitar sangrías
+\setlength{\parindent}{0cm}
+
+% Formato para estructuras como with.
+\usepackage{listings}
+
+% Código
+\newcommand{\code}[1]{\textcolor{white!25!black}{\texttt{#1}}}
+
+% Letter colors.
+\usepackage{xcolor}
+
+% Columnas multiples
+\usepackage{multicol}
+
+\usepackage{amsmath}
+%%\usepackage{graphicx}
+%%\usepackage{subcaption}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{url}
+
+%%Tablas con color
+\usepackage{xcolor, colortbl}
+\usepackage{array, multirow, multicol}
+\cellcolor[modelo color]{color}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+\title{Facultad de Ciencias, UNAM}
+\date{\today}
+
+\begin{document}
+
+\thispagestyle{empty}
+
+	\begin{figure}[ht]
+	   \minipage{0.76\textwidth}
+			\includegraphics[width=4cm]{Logo_UNAM.png}
+			\label{EscudoUNAM}
+	   \endminipage
+	   \minipage{0.32\textwidth}
+			\includegraphics[height = 4.9cm ,width=4cm]{Logo_FC.png}
+			\label{EscudoFC}
+		\endminipage
+	\end{figure}
+
+	\begin{center}
+	\vspace{0.8cm}
+	\LARGE
+	UNIVERSIDAD NACIONAL AUTÓNOMA DE MÉXICO
+
+	\vspace{0.7cm}
+	\LARGE
+	FACULTAD DE CIENCIAS
+
+	\vspace{0.8 cm}
+	\Large
+	\textbf{Tarea 6}
+
+	\vspace{0.8 cm}
+	\normalsize
+	INTEGRANTES \\
+	\vspace{.2cm}
+	\large
+	\textbf{Torres Valencia Kevin Jair - \texttt{318331818}}\\
+	\textbf{Aguilera Moreno Adrián - \texttt{421005200}}\\
+	\textbf{Rivera Silva Marco Antonio - \texttt{318183583}}\\
+	%\textbf{Nombre - \texttt{Número de cuenta}}
+
+	\vspace{1 cm}
+	\normalsize
+	PROFESORA \\
+	\vspace{.2cm}
+	\large
+	\textbf{Karla Ramírez Pulido}
+
+	\vspace{1 cm}
+	AYUDANTES \\
+	\vspace{.2cm}
+	\large
+	\textbf{Alan Alexis Martínez López}\\
+	\textbf{Manuel Ignacio Castillo López}\\
+	\textbf{Alejandra Cervera Taboada}
+	\vspace{1.3cm}
+
+	\normalsize
+	ASIGNATURA \\
+	\vspace{.2cm}
+	\large
+	\textbf{Lenguajes de Programación}
+
+	\vspace{1 cm}
+	\today
+	\end{center}
+
+	\newpage
+	\input{Pregunta01}
+	\input{Pregunta02}
+	\input{Pregunta03}
+	\input{Pregunta04}
+	\input{Pregunta05}
+\end{document}

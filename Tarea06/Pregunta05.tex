@@ -1,0 +1,24 @@
+\Large\textbf{\textcolor{blue}{5.  *Punto extra*}} 
+Observa la siguiente función del lenguaje de programación \code{Racket}
+
+\begin{lstlisting}
+(let ([sum (lambda (n) (if (zero? n) 0 (+ n (sum (sub1 n))))))])
+      (sum 5))
+\end{lstlisting}
+
+\begin{enumerate}[a.]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%      Inciso A        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Prueba la expresión en el intérprete de \code{Racket} y con base en la respuesta 
+obtenida, explica el proceso que siguió el intérprete para llegar a ésta. Anexa una 
+captura de pantalla del intérprete de \code{Racket} al probar la expresión.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%      Inciso B        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Modifica la función usando el Combinador de Punto Fijo Y .Prueba la expresión en 
+el intérprete de \code{Racket} y con base en la respuesta obtenida, explica el proceso que 
+siguió el intérprete para llegar a ésta. Anexa una captura de pantalla del intérprete 
+de \code{Racket} al probar la expresión.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%      Inciso C        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Modifica la función usando el Combinador de Punto Fijo Z. Prueba la expresión en 
+el intérprete de \code{Racket} y con base en la respuesta obtenida, explica el proceso que 
+siguió el intérprete para llegar a ésta. Anexa una captura de pantalla del intérprete 
+de \code{Racket} al probar la expresión.
+\end{enumerate}
