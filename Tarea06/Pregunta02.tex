@@ -1,3 +1,42 @@
 \Large\textbf{\textcolor{blue}{2.}}
 Explica con tus propias palabras el funcionamiento de las primitivas \code{call/cc} y
 \code{let/cc} del lenguaje de programación \code{Racket} y da un ejemplo de uso de cada una.\\
+
+$\rhd$ \textbf{Solución:} El uso de \code{call/cc} y \code{let/cc} se reducen al mismo fin.
+No existe diferencia en el resultado al implementar estas funciones, sin embargo existen ciertas
+diferencias sutiles, como lo son
+\begin{enumerate}
+\item \textit{Sintaxis.} Al usar \code{call/cc} tenemos que hacer uso de una \code{lambda} explícita,
+mientras que con \code{let/cc} no es necesario.
+\item \textit{Semántica.} En cuanto a semántica la diferencia es que con \code{let/cc} la continuación
+esta ligada a nuestra variable \code{k} (ya sea explícita o implícita). Al usar \code{call/cc} una
+\code{k} que puede ser implícita o explícita, pero funge como la continuación (a diferencia de \code{let/cc}).
+\end{enumerate}
+A continuación se da una función escrita con \code{call/cc} y \code{let/cc}:
+\begin{itemize}
+\item Función con base en la primitiva \code{let/cc}:
+\begin{lstlisting}
+  (define (f n)
+     (* 10
+        (/ 5
+           (let/cc k
+                   (k (- 2
+                      (+ 1 n)))))))
+\end{lstlisting}
+\item Función con base en la primitiva \code{call/cc}:
+\begin{lstlisting}
+  (define (f n)
+     (* 10
+        (/ 5
+           (call/cc
+                   (lambda(k)
+                        (k (- 2
+                           (+ 1 n))))))))
+\end{lstlisting}
+\end{itemize}
+En ambos casos se hace uso del ``contexto'' de la función, por lo que sus resultados al ser usadas
+serán el mismo.
+\hfill $\lhd$
+\newpage
+
+
